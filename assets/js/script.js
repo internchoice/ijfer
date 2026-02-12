@@ -16,28 +16,14 @@ function getBasePath() {
 async function loadComponent(elementId, componentPath) {
   const el = document.getElementById(elementId);
   if (!el) return;
-  
-  // Add loading class to show consistent appearance
-  el.classList.add('component-placeholder');
-  
   const base = getBasePath();
   try {
     const response = await fetch(componentPath);
     let html = await response.text();
     html = html.replace(/BASE/g, base);
-    
-    // Insert content with a smooth transition
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
-    
-    // Apply the new content with smooth transition
-    el.innerHTML = tempDiv.innerHTML;
-    
-    // Remove the loading class after content is loaded
-    el.classList.remove('component-placeholder');
+    el.outerHTML = html;
   } catch (err) {
     console.warn('Could not load component:', componentPath, err);
-    el.classList.remove('component-placeholder');
   }
 }
 
@@ -51,9 +37,6 @@ async function loadComponents() {
     loadComponent('footer-placeholder', compBase + 'footer.html')
   ]);
   setActiveNav();
-  
-  // Add class to body when components are loaded
-  document.body.classList.add('components-loaded');
 }
 
 // Load sidebar component (optional - only on pages that need it)
@@ -107,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   if (!document.getElementById('header-placeholder')) {
     setActiveNav();
   }
-  
+
   // Contact form
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
