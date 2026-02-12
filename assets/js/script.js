@@ -6,7 +6,7 @@
 // Get base path for component links (root vs subpages)
 function getBasePath() {
   const path = window.location.pathname;
-  if (path.includes('/pages/archives/') || path.includes('/pages/about/')) {
+  if (path.includes('/pages/')) {
     return '../../';
   }
   return '';
@@ -166,4 +166,34 @@ document.addEventListener('DOMContentLoaded', async function() {
       });
     }
   });
+  
+  // Footer newsletter subscription
+  const newsletterForm = document.querySelector('.footer-newsletter');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = this.querySelector('input[type="email"]');
+      const email = emailInput.value.trim();
+      
+      if (email) {
+        // Show success message
+        const originalBtn = this.querySelector('button');
+        const originalText = originalBtn.innerHTML;
+        originalBtn.innerHTML = '<i class="fas fa-check"></i>';
+        originalBtn.classList.remove('btn-primary');
+        originalBtn.classList.add('btn-success');
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          originalBtn.innerHTML = originalText;
+          originalBtn.classList.remove('btn-success');
+          originalBtn.classList.add('btn-primary');
+          emailInput.value = '';
+        }, 2000);
+        
+        console.log('Newsletter subscription:', email);
+        // Here you would typically send the email to your backend
+      }
+    });
+  }
 });
