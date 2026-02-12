@@ -1,0 +1,331 @@
+/* IJFER - Indian Journals for Engineering and Research - Custom Styles */
+
+/* Smooth loading for dynamic components */
+.component-placeholder {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+/* Ensure placeholders have consistent dimensions */
+#header-placeholder {
+  min-height: 80px;
+}
+
+#navbar-placeholder {
+  min-height: 60px;
+}
+
+#footer-placeholder {
+  min-height: 200px;
+}
+
+:root {
+  --primary: #0d6efd;
+  --primary-dark: #0a58ca;
+  --accent: #198754;
+  --text-dark: #212529;
+  --text-muted: #6c757d;
+  --border-light: #dee2e6;
+  --bg-light: #f8f9fa;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  background: var(--bg-light);
+}
+
+/* Header & Logo */
+.site-header {
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.site-header .logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.site-header .tagline {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
+
+/* Navigation */
+.navbar-custom {
+  background: var(--white) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  padding: 0.5rem 0;
+}
+
+.navbar-custom .nav-link {
+  color: var(--text-dark) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+  color: var(--primary) !important;
+  background: rgba(13, 110, 253, 0.08);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  padding: 0.5rem 0;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(13, 110, 253, 0.08);
+  color: var(--primary);
+}
+
+.dropdown-toggle::after {
+  margin-left: 0.5em;
+}
+
+/* Sidebar Panels */
+.sidebar-panel {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-panel h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-panel ul li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-panel ul li a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  padding: 0.35rem 0;
+  transition: color 0.2s;
+}
+
+.sidebar-panel ul li a:hover {
+  color: var(--primary);
+  padding-left: 5px;
+}
+
+/* Main Content Area */
+.main-content {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 2rem;
+  min-height: 500px;
+}
+
+.main-content h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.main-content h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Feature Cards */
+.feature-card {
+  background: var(--bg-light);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--primary);
+  transition: transform 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateX(4px);
+}
+
+/* Indexing Logos */
+.indexing-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.indexing-logos img {
+  max-height: 40px;
+  max-width: 80px;
+  object-fit: contain;
+  filter: grayscale(30%);
+  opacity: 0.9;
+}
+
+/* News/Announcements */
+.news-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed var(--border-light);
+  font-size: 0.9rem;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item .date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Footer */
+.site-footer {
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  color: white;
+  margin-top: 3rem;
+  padding: 2.5rem 0 1.5rem;
+}
+
+.site-footer h6 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.site-footer a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.site-footer a:hover {
+  color: white;
+}
+
+.site-footer .footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Forms */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  border: none;
+  padding: 0.5rem 1.5rem;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+  transform: translateY(-1px);
+}
+
+/* FAQ Accordion */
+.accordion-button:not(.collapsed) {
+  background: rgba(13, 110, 253, 0.1);
+  color: var(--primary-dark);
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Archive/Paper Cards */
+.paper-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.2s;
+}
+
+.paper-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.paper-card .doi {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Page Sections */
+.page-section {
+  margin-bottom: 2rem;
+}
+
+.page-section h3 {
+  font-size: 1.25rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+/* Table Styling */
+.table-custom th {
+  background: var(--primary-dark);
+  color: white;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .sidebar-panel {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .logo-text {
+    font-size: 1rem;
+  }
+  
+  .main-content {
+    padding: 1.25rem;
+  }
+}
