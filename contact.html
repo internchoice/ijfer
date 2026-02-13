@@ -18,44 +18,98 @@
       <div class="col-lg-8">
         <div class="main-content">
           <h1>Contact Us</h1>
-          <p>We have a 24×7 author query and problem resolving system. Feel free to reach out for any questions regarding submissions, publications, or general inquiries.</p>
+          
+          <div class="contact-info mb-4">
+            <div class="address-info bg-light p-4 rounded mb-4">
+              <h4 class="mb-3"><i class="fas fa-map-marker-alt text-primary me-2"></i>Our Address</h4>
+              <p class="mb-2"><strong>International Research Journal of Modernization in Engineering Technology & Science</strong></p>
+              <p class="mb-2">Indus Satellite Green, AB Road,</p>
+              <p class="mb-3">Indore (Madhya Pradesh)</p>
+              
+              <div class="contact-methods">
+                <p class="mb-2"><i class="fas fa-envelope text-primary me-2"></i><strong>Email:</strong> editor@IJFER.com</p>
+                <p class="mb-0"><i class="fas fa-phone text-primary me-2"></i><strong>Phone:</strong> +91 786-969-67-94, +91 786-986-27-10</p>
+                <p class="mb-0"><small class="text-muted">(WhatsApp or SMS on these numbers)</small></p>
+              </div>
+            </div>
+          </div>
 
-          <form id="contactForm">
-            <div class="mb-3">
-              <label class="form-label">Name *</label>
-              <input type="text" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Email *</label>
-              <input type="email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Subject</label>
-              <select class="form-select">
-                <option>Author Enquiry</option>
-                <option>Reviewer Registration</option>
-                <option>Paper Submission</option>
-                <option>General Query</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Message *</label>
-              <textarea class="form-control" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+          <div class="contact-form-section">
+            <h3 class="mb-4">Send Contact Request</h3>
+            <form id="contactForm">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Contact Name *</label>
+                  <input type="text" class="form-control" placeholder="Type Contact Name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Email Id *</label>
+                  <input type="email" class="form-control" placeholder="Type Email Id" required>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Mobile Number *</label>
+                  <input type="tel" class="form-control" placeholder="Type Mobile Number" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Type Of Contact</label>
+                  <select class="form-select">
+                    <option value="">Select One</option>
+                    <option>Author Enquiry</option>
+                    <option>Reviewer Registration</option>
+                    <option>Paper Submission</option>
+                    <option>Editorial Board</option>
+                    <option>General Query</option>
+                    <option>Technical Support</option>
+                    <option>Payment Related</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Subject *</label>
+                <input type="text" class="form-control" placeholder="Type Subject" required>
+              </div>
+              
+              <div class="mb-4">
+                <label class="form-label">Contact Message *</label>
+                <textarea class="form-control" rows="6" placeholder="Type Contact Message" required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-lg px-5">
+                <i class="fas fa-paper-plane me-2"></i>Send Message
+              </button>
+            </form>
+          </div>
         </div>
       </div>
+      
       <div class="col-lg-4">
         <div class="sidebar-panel mt-4 mt-lg-0">
-          <h5>Contact Details</h5>
-          <p class="mb-2"><strong>ISSN:</strong> 2582-5208</p>
-          <p class="mb-2"><strong>Website:</strong> www.IJFER.com</p>
-          <p class="mb-0">Use the contact form for author enquiries, reviewer registration, and editorial communication.</p>
+          <h5><i class="fas fa-info-circle text-primary me-2"></i>Quick Information</h5>
+          <ul class="list-unstyled ps-3">
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>ISSN: 2582-5208</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>24/7 Support Available</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Response within 6-24 hours</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Multi-language Support</li>
+          </ul>
         </div>
-        <div class="sidebar-panel">
-          <h5>Response Time</h5>
-          <p class="mb-0">We typically respond within 6 hours for paper-related queries and 24 hours for general inquiries.</p>
+        
+        <div class="sidebar-panel mt-4">
+          <h5><i class="fas fa-clock text-primary me-2"></i>Response Time</h5>
+          <p class="mb-2"><strong>Paper-related queries:</strong> Within 6 hours</p>
+          <p class="mb-0"><strong>General inquiries:</strong> Within 24 hours</p>
+        </div>
+        
+        <div class="sidebar-panel mt-4">
+          <h5><i class="fas fa-headset text-primary me-2"></i>Support Channels</h5>
+          <div class="support-channels">
+            <p class="mb-2"><i class="fab fa-whatsapp text-success me-2"></i>WhatsApp Support</p>
+            <p class="mb-2"><i class="fas fa-sms text-info me-2"></i>SMS Support</p>
+            <p class="mb-0"><i class="fas fa-envelope text-warning me-2"></i>Email Support</p>
+          </div>
         </div>
       </div>
     </div>

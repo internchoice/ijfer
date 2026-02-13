@@ -104,10 +104,94 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Paper submission form
   const submissionForm = document.getElementById('submissionForm');
   if (submissionForm) {
+    // Add author functionality
+    const addAuthorBtn = document.getElementById('addAuthorBtn');
+    const authorsContainer = document.getElementById('authorsContainer');
+    
+    if (addAuthorBtn && authorsContainer) {
+      addAuthorBtn.addEventListener('click', function() {
+        const authorRow = document.createElement('div');
+        authorRow.className = 'author-row';
+        authorRow.innerHTML = `
+          <input type="text" class="author-name" placeholder="Author Full Name" required>
+          <input type="email" class="author-email" placeholder="Author Email ID" required>
+          <input type="tel" class="author-phone" placeholder="Contact Number" required>
+          <input type="text" class="author-institution" placeholder="College/Institute Name" required>
+          <button type="button" class="btn btn-danger btn-sm remove-author">Remove</button>
+        `;
+        authorsContainer.appendChild(authorRow);
+        
+        // Add event listener to the remove button
+        const removeBtn = authorRow.querySelector('.remove-author');
+        removeBtn.addEventListener('click', function() {
+          authorsContainer.removeChild(authorRow);
+        });
+      });
+      
+      // Add initial remove button to the first author row
+      const firstAuthorRow = authorsContainer.querySelector('.author-row');
+      if (firstAuthorRow) {
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'btn btn-danger btn-sm remove-author';
+        removeBtn.textContent = 'Remove';
+        firstAuthorRow.appendChild(removeBtn);
+        
+        removeBtn.addEventListener('click', function() {
+          authorsContainer.removeChild(firstAuthorRow);
+        });
+      }
+    }
+    
+    // Form submission
     submissionForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Submission received! You will receive a Paper ID via email shortly.');
+      
+      // Get form data
+      const formData = new FormData(submissionForm);
+      
+      // Validate form
+      const researchArea = document.getElementById('researchArea').value;
+      const paperTitle = document.getElementById('paperTitle').value;
+      const abstract = document.getElementById('abstract').value;
+      const country = document.getElementById('country').value;
+      const fileUpload = document.getElementById('fileUpload').files[0];
+      
+      if (!researchArea || !paperTitle || !abstract || !country || !fileUpload) {
+        alert('Please fill in all required fields and upload your manuscript.');
+        return;
+      }
+      
+      // Get all authors
+      const authorRows = document.querySelectorAll('.author-row');
+      let allAuthorsValid = true;
+      authorRows.forEach(row => {
+        const inputs = row.querySelectorAll('input:not(.remove-author)');
+        inputs.forEach(input => {
+          if (!input.value.trim()) {
+            allAuthorsValid = false;
+          }
+        });
+      });
+      
+      if (!allAuthorsValid) {
+        alert('Please fill in all author details for each author.');
+        return;
+      }
+      
+      // Simulate submission
+      alert('Paper submission received! You will receive a Paper ID via email shortly.');
       submissionForm.reset();
+      
+      // Remove any dynamically added author rows except the first one
+      const existingRows = document.querySelectorAll('.author-row:not(:first-child)');
+      existingRows.forEach(row => row.remove());
+      
+      // Remove the remove button from the first row if it exists
+      const firstRowButtons = document.querySelector('.author-row .remove-author');
+      if (firstRowButtons) {
+        firstRowButtons.remove();
+      }
     });
   }
 

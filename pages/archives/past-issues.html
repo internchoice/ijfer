@@ -6,6 +6,7 @@
   <title>Past Issues - IJFER Archives</title>
   <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
@@ -22,29 +23,63 @@
         </ol>
       </nav>
       <h1>Past Issues</h1>
-      <p>Access all previously published volumes and issues. Issues are archived by year, volume, and issue number.</p>
-      <div class="accordion" id="pastIssuesAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#issue2024">2024</button>
-          </h2>
-          <div id="issue2024" class="accordion-collapse collapse show" data-bs-parent="#pastIssuesAccordion">
-            <div class="accordion-body">
-              <p class="small text-muted mb-2">Vol. IX, Issues 1-12</p>
-              <p>Browse archived papers from 2024.</p>
+      <p class="lead">Search and browse through our archive of published volumes and issues.</p>
+      
+      <!-- Search Section -->
+      <div class="search-section mb-5">
+        <div class="search-container position-relative">
+          <div class="input-group">
+            <span class="input-group-text bg-primary text-white">
+              <i class="fas fa-search"></i>
+            </span>
+            <input type="text" id="issueSearch" class="form-control form-control-lg" placeholder="Search past issues (e.g., Volume 1 Issue 1, 2024, June)" autocomplete="off">
+            <button class="btn btn-primary btn-lg" type="button" id="searchButton">
+              <i class="fas fa-arrow-right me-2"></i>Show
+            </button>
+          </div>
+          
+          <!-- Autocomplete Dropdown -->
+          <div id="searchDropdown" class="search-dropdown shadow-lg rounded-3">
+            <div class="dropdown-header bg-light p-2 border-bottom">
+              <small class="text-muted">Select an issue from the list</small>
+            </div>
+            <div class="dropdown-body" id="dropdownResults">
+              <!-- Results will be populated by JavaScript -->
+            </div>
+            <div class="dropdown-footer bg-light p-2 border-top text-center">
+              <small class="text-muted">Showing all available issues</small>
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#issue2023">2023</button>
-          </h2>
-          <div id="issue2023" class="accordion-collapse collapse" data-bs-parent="#pastIssuesAccordion">
-            <div class="accordion-body">
-              <p class="small text-muted mb-2">Vol. VIII, Issues 1-12</p>
-              <p>Browse archived papers from 2023.</p>
+      </div>
+      
+      <!-- Selected Issue Display -->
+      <div id="selectedIssue" class="selected-issue-container d-none">
+        <div class="card border-primary shadow">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0" id="selectedIssueTitle">Selected Issue</h3>
+          </div>
+          <div class="card-body">
+            <div id="issueDetails">
+              <!-- Issue details will be populated here -->
+            </div>
+            <div class="mt-3">
+              <a href="#" class="btn btn-primary me-2" id="viewIssueBtn">
+                <i class="fas fa-eye me-1"></i>View Issue
+              </a>
+              <a href="#" class="btn btn-outline-primary" id="downloadIssueBtn">
+                <i class="fas fa-download me-1"></i>Download PDF
+              </a>
             </div>
           </div>
+        </div>
+      </div>
+      
+      <!-- All Issues Grid -->
+      <div class="all-issues-section">
+        <h3 class="mb-4">All Past Issues</h3>
+        <div class="row" id="allIssuesGrid">
+          <!-- Issues will be populated by JavaScript -->
         </div>
       </div>
       <p class="mt-3"><a href="../../archives.html" class="btn btn-outline-primary">← Back to Archives</a></p>
@@ -54,5 +89,202 @@
   <div id="footer-placeholder"></div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../../assets/js/script.js"></script>
+  <script>
+    // Past Issues Search Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Sample past issues data
+      const pastIssues = [
+        { id: 1, title: "Volume 1 Issue 1", month: "June", year: 2024, volume: "Vol. I", papers: 12 },
+        { id: 2, title: "Volume 1 Issue 2", month: "July", year: 2024, volume: "Vol. I", papers: 8 },
+        { id: 3, title: "Volume 1 Issue 3", month: "August", year: 2024, volume: "Vol. I", papers: 15 },
+        { id: 4, title: "Volume 1 Issue 4", month: "September", year: 2024, volume: "Vol. I", papers: 10 },
+        { id: 5, title: "Volume 1 Issue 5", month: "October", year: 2024, volume: "Vol. I", papers: 11 },
+        { id: 6, title: "Volume 1 Issue 6", month: "November", year: 2024, volume: "Vol. I", papers: 9 },
+        { id: 7, title: "Volume 1 Issue 7", month: "December", year: 2024, volume: "Vol. I", papers: 13 },
+        { id: 8, title: "Volume 2 Issue 1", month: "January", year: 2025, volume: "Vol. II", papers: 14 },
+        { id: 9, title: "Volume 2 Issue 2", month: "February", year: 2025, volume: "Vol. II", papers: 12 },
+        { id: 10, title: "Volume 2 Issue 3", month: "March", year: 2025, volume: "Vol. II", papers: 16 },
+        { id: 11, title: "Volume 2 Issue 4", month: "April", year: 2025, volume: "Vol. II", papers: 11 },
+        { id: 12, title: "Volume 2 Issue 5", month: "May", year: 2025, volume: "Vol. II", papers: 9 }
+      ];
+
+      const searchInput = document.getElementById('issueSearch');
+      const searchDropdown = document.getElementById('searchDropdown');
+      const dropdownResults = document.getElementById('dropdownResults');
+      const searchButton = document.getElementById('searchButton');
+      const selectedIssue = document.getElementById('selectedIssue');
+      const allIssuesGrid = document.getElementById('allIssuesGrid');
+
+      // Display all issues in grid
+      function displayAllIssues() {
+        allIssuesGrid.innerHTML = '';
+        pastIssues.forEach(issue => {
+          const issueCard = createIssueCard(issue);
+          allIssuesGrid.appendChild(issueCard);
+        });
+      }
+
+      // Create issue card for grid
+      function createIssueCard(issue) {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4';
+        
+        col.innerHTML = `
+          <div class="card h-100 issue-card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">${issue.title}</h5>
+              <p class="card-text">
+                <i class="fas fa-calendar-alt text-primary me-2"></i>
+                <strong>${issue.month} ${issue.year}</strong>
+              </p>
+              <p class="card-text">
+                <i class="fas fa-book text-success me-2"></i>
+                ${issue.volume}
+              </p>
+              <p class="card-text">
+                <i class="fas fa-file-alt text-info me-2"></i>
+                ${issue.papers} papers
+              </p>
+            </div>
+            <div class="card-footer bg-transparent">
+              <button class="btn btn-sm btn-outline-primary w-100 select-issue-btn" 
+                      data-issue='${JSON.stringify(issue)}'>
+                <i class="fas fa-search me-1"></i>Select Issue
+              </button>
+            </div>
+          </div>
+        `;
+        
+        return col;
+      }
+
+      // Filter issues based on search term
+      function filterIssues(searchTerm) {
+        if (!searchTerm.trim()) return pastIssues;
+        
+        const term = searchTerm.toLowerCase();
+        return pastIssues.filter(issue => 
+          issue.title.toLowerCase().includes(term) ||
+          issue.month.toLowerCase().includes(term) ||
+          issue.year.toString().includes(term) ||
+          issue.volume.toLowerCase().includes(term)
+        );
+      }
+
+      // Display filtered results in dropdown
+      function showDropdownResults(issues) {
+        dropdownResults.innerHTML = '';
+        
+        if (issues.length === 0) {
+          dropdownResults.innerHTML = `
+            <div class="p-3 text-center text-muted">
+              <i class="fas fa-search fa-2x mb-2"></i>
+              <p class="mb-0">No matching issues found</p>
+            </div>
+          `;
+          return;
+        }
+
+        issues.forEach(issue => {
+          const resultItem = document.createElement('div');
+          resultItem.className = 'dropdown-item d-flex justify-content-between align-items-center p-3 border-bottom';
+          resultItem.style.cursor = 'pointer';
+          resultItem.innerHTML = `
+            <div>
+              <div class="fw-bold">${issue.title}</div>
+              <div class="small text-muted">${issue.month} ${issue.year} • ${issue.volume} • ${issue.papers} papers</div>
+            </div>
+            <i class="fas fa-chevron-right text-muted"></i>
+          `;
+          
+          resultItem.addEventListener('click', () => {
+            selectIssue(issue);
+            hideDropdown();
+          });
+          
+          dropdownResults.appendChild(resultItem);
+        });
+      }
+
+      // Select an issue
+      function selectIssue(issue) {
+        searchInput.value = `${issue.title}, ${issue.month} ${issue.year}`;
+        
+        document.getElementById('selectedIssueTitle').textContent = issue.title;
+        document.getElementById('issueDetails').innerHTML = `
+          <div class="row">
+            <div class="col-md-6">
+              <p><i class="fas fa-calendar-alt text-primary me-2"></i><strong>Date:</strong> ${issue.month} ${issue.year}</p>
+              <p><i class="fas fa-book text-success me-2"></i><strong>Volume:</strong> ${issue.volume}</p>
+            </div>
+            <div class="col-md-6">
+              <p><i class="fas fa-file-alt text-info me-2"></i><strong>Papers:</strong> ${issue.papers} research papers</p>
+              <p><i class="fas fa-barcode text-warning me-2"></i><strong>Issue ID:</strong> #${issue.id}</p>
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('viewIssueBtn').href = `current-issue.html?issue=${issue.id}`;
+        document.getElementById('downloadIssueBtn').href = `#`;
+        
+        selectedIssue.classList.remove('d-none');
+        selectedIssue.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Show dropdown
+      function showDropdown() {
+        searchDropdown.style.display = 'block';
+      }
+
+      // Hide dropdown
+      function hideDropdown() {
+        searchDropdown.style.display = 'none';
+      }
+
+      // Event Listeners
+      searchInput.addEventListener('focus', function() {
+        const filtered = filterIssues(this.value);
+        showDropdownResults(filtered);
+        showDropdown();
+      });
+
+      searchInput.addEventListener('input', function() {
+        const filtered = filterIssues(this.value);
+        showDropdownResults(filtered);
+        showDropdown();
+      });
+
+      searchButton.addEventListener('click', function() {
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+          const filtered = filterIssues(searchTerm);
+          if (filtered.length > 0) {
+            selectIssue(filtered[0]);
+          }
+        }
+        hideDropdown();
+      });
+
+      // Hide dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!searchDropdown.contains(e.target) && e.target !== searchInput) {
+          hideDropdown();
+        }
+      });
+
+      // Handle select buttons in grid
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('select-issue-btn') || e.target.closest('.select-issue-btn')) {
+          const button = e.target.closest('.select-issue-btn');
+          const issueData = JSON.parse(button.getAttribute('data-issue'));
+          selectIssue(issueData);
+        }
+      });
+
+      // Initialize
+      displayAllIssues();
+      showDropdownResults(pastIssues);
+    });
+  </script>
 </body>
 </html>
