@@ -285,9 +285,9 @@ h2 {
 ------------------------------------*/
 .main-content {
   background: var(--white);
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.12);
+  padding: 2.5rem;
   min-height: 500px;
 }
 
@@ -1275,15 +1275,93 @@ h2 {
   .sidebar-panel {
     margin-bottom: 1rem;
   }
+  
+  /* Improve mobile navigation */
+  .navbar-custom {
+    padding: 0.25rem 0;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem !important;
+  }
 }
 
 @media (max-width: 768px) {
-  .site-header .logo-text {
-    font-size: 1rem;
+  .site-header {
+    padding: 0.75rem 0;
   }
-
+  
+  .site-header .logo-text {
+    font-size: 0.9rem;
+  }
+  
+  .site-header .tagline {
+    font-size: 0.75rem;
+  }
+  
+  .header-logo {
+    max-height: 50px;
+  }
+  
   .main-content {
     padding: 1.25rem;
+  }
+  
+  /* Improve mobile navigation */
+  .navbar-nav .nav-link {
+    padding: 0.875rem 1.25rem !important;
+    font-size: 0.95rem;
+  }
+  
+  .dropdown-menu {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .site-header .logo-text {
+    font-size: 0.8rem;
+  }
+  
+  .site-header .tagline {
+    font-size: 0.7rem;
+  }
+  
+  .header-logo {
+    max-height: 40px;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  /* Mobile-first navigation improvements */
+  .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.875rem 1rem !important;
+    font-size: 0.9rem;
+  }
+  
+  /* Improve readability on small screens */
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+  
+  .news-item {
+    margin-bottom: 1rem;
   }
 }
 
@@ -1540,6 +1618,92 @@ body:has(#navbar-placeholder) .main-content h1 {
 /*------------------------------------
   Submit Paper Form Styles
 ------------------------------------*/
+/* Enhance the overall form presentation */
+#submissionForm {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.submit-paper-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--bg-light), var(--white));
+  border-radius: 10px;
+  border-left: 4px solid var(--primary);
+}
+
+.submit-paper-intro h1 {
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.submit-paper-intro p {
+  color: var(--text-medium);
+  margin: 0;
+}
+
+/* Form Progress Steps */
+.form-progress-steps {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  color: var(--text-light);
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  right: -50%;
+  height: 2px;
+  background: var(--border-light);
+  z-index: 1;
+}
+
+.step.active {
+  color: var(--primary);
+}
+
+.step.active .step-number {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.step.completed .step-number {
+  background: var(--success);
+  color: white;
+  border-color: var(--success);
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border-medium);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1547,8 +1711,9 @@ body:has(#navbar-placeholder) .main-content h1 {
   margin-bottom: 2rem;
   background: var(--white);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid var(--border-medium);
 }
 
 .form-grid > div {
@@ -1573,24 +1738,54 @@ body:has(#navbar-placeholder) .main-content h1 {
   background: var(--gradient-primary);
   color: var(--text-white);
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   margin: 0;
   font-weight: 600;
   text-align: center;
   font-size: 1.1rem;
-  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .form-grid select,
-.form-grid input,
+.form-grid input:not([list]),
 .form-grid textarea {
   width: 100%;
   padding: 0.875rem;
-  border: 2px solid var(--border-light);
-  border-radius: 6px;
+  border: 2px solid var(--border-medium);
+  border-radius: 8px;
   font-size: 1rem;
-  background: var(--white);
+  background: var(--bg-light);
   transition: all 0.3s ease;
+}
+
+.form-grid select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.2em 1.2em;
+  padding-right: 2.5rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.form-grid input[list] {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid var(--border-medium);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--bg-light);
+  transition: all 0.3s ease;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.2em 1.2em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .form-grid select:focus,
@@ -1598,7 +1793,9 @@ body:has(#navbar-placeholder) .main-content h1 {
 .form-grid textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(11, 31, 59, 0.2);
+  transform: translateY(-2px);
 }
 
 .form-grid textarea {
@@ -1612,16 +1809,17 @@ body:has(#navbar-placeholder) .main-content h1 {
   gap: 1rem;
   margin-bottom: 1rem;
   padding: 1.5rem;
-  background: linear-gradient(to bottom, var(--bg-light), #ffffff);
+  background: var(--bg-light);
   border-radius: 8px;
-  border: 2px solid var(--border-light);
+  border: 2px solid var(--border-medium);
   position: relative;
   transition: all 0.3s ease;
 }
 
 .author-row:hover {
   border-color: var(--primary);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: var(--white);
 }
 
 .author-row input {
@@ -1630,33 +1828,41 @@ body:has(#navbar-placeholder) .main-content h1 {
 
 .upload-section {
   margin-bottom: 1.5rem;
-  background: var(--white);
+  background: var(--bg-light);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid var(--border-medium);
 }
 
 .upload-section input[type="file"] {
   width: 100%;
   padding: 2rem;
-  border: 3px dashed var(--primary);
+  border: 2px solid var(--border-medium);
   border-radius: 8px;
-  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  background: var(--white);
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
+
 .upload-section input[type="file"]:hover {
-  background: linear-gradient(to bottom, var(--bg-light), var(--white));
-  border-color: var(--primary-dark);
+  background: var(--bg-light);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .file-note {
   display: block;
   margin-top: 0.5rem;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-medium);
   text-align: center;
   font-style: italic;
 }
@@ -1665,10 +1871,10 @@ body:has(#navbar-placeholder) .main-content h1 {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  background: var(--white);
+  background: var(--bg-light);
   padding: 1.5rem;
-  border-radius: 6px;
-  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  border: 2px solid var(--border-medium);
   margin-bottom: 1.5rem;
 }
 
@@ -1689,10 +1895,11 @@ body:has(#navbar-placeholder) .main-content h1 {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  background: var(--white);
+  background: var(--bg-light);
   padding: 1.5rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid var(--border-medium);
 }
 
 /* Responsive adjustments for submit form */
@@ -1725,132 +1932,310 @@ body:has(#navbar-placeholder) .main-content h1 {
 }
 
 /*------------------------------------
-  Submission Process Diagram Styles
+  Submission Process Flow Styles
 ------------------------------------*/
-.process-diagram {
+.submission-process-flow {
   background: var(--white);
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   padding: 2rem;
   margin: 2rem 0;
-  overflow-x: auto;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-.process-steps {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  min-width: max-content;
-}
-
-.process-step {
-  text-align: center;
-  padding: 1.5rem;
-  background: var(--bg-light);
-  border-radius: 8px;
-  min-width: 140px;
-  margin: 0 0.5rem;
+.process-timeline {
   position: relative;
-  transition: all 0.3s ease;
+  max-width: 100%;
 }
 
-.process-step:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-primary);
+  left: 20px;
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.timeline-step {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 60px;
+  min-height: 120px;
+}
+
+.timeline-step::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: var(--white);
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  left: 8px;
+  top: 0;
+  z-index: 2;
 }
 
 .step-number {
-  width: 32px;
-  height: 32px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
   background: var(--primary);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.step-content {
+  background: #e9ecef;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--primary);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.step-content:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  background: #dfe3e8;
 }
 
 .step-icon {
-  font-size: 1.8rem;
-  margin-bottom: 0.75rem;
+  font-size: 2rem;
   color: var(--primary);
+  margin-bottom: 0.75rem;
+  display: block;
 }
 
 .step-title {
   font-weight: 600;
   color: var(--primary-dark);
   margin-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
-.step-description {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.4;
+.step-desc {
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  font-style: italic;
+  margin-bottom: 0.5rem;
 }
 
-.arrow {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  margin: 0 1rem;
-  min-width: 24px;
+.decision-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
 }
 
-.process-details h3 {
-  color: var(--primary-dark);
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
+.decision-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--bg-secondary);
+  border-radius: 6px;
+  font-weight: 500;
 }
 
-/* Responsive adjustments for process diagram */
+.rejection-path .step-content {
+  border-left-color: #dc3545;
+  background: #ffebee;
+}
+
+.rejection-path .step-content:hover {
+  background: #f1d8d8;
+}
+
+.rejection-path .step-icon {
+  color: #dc3545;
+}
+
+.continue-path .step-content {
+  border-left-color: #28a745;
+  background: #e8f5e9;
+}
+
+.continue-path .step-content:hover {
+  background: #c8e6ce;
+}
+
+.continue-path .step-icon {
+  color: #28a745;
+}
+
+.conditional-step .step-content {
+  border-left-color: #ffc107;
+  background: #fff8e1;
+}
+
+.conditional-step .step-content:hover {
+  background: #f0e6b3;
+}
+
+.conditional-step .step-icon {
+  color: #ffc107;
+}
+
+.decision-step .step-content {
+  border-left-color: #007bff;
+  background: #e3f2fd;
+}
+
+.decision-step .step-content:hover {
+  background: #c5e4fd;
+}
+
+.decision-step .step-content {
+  min-height: 200px;
+}
+
+/* Responsive adjustments for process flow */
 @media (max-width: 992px) {
-  .process-steps {
-    flex-wrap: wrap;
+  .submission-process-flow {
+    padding: 1.5rem;
   }
   
-  .process-step {
-    min-width: 120px;
-    margin: 0.5rem;
+  .process-timeline::before {
+    left: 15px;
   }
   
-  .arrow {
-    display: none;
+  .timeline-step {
+    padding-left: 50px;
+    min-height: 100px;
   }
   
-  .process-steps::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--primary), transparent);
-    margin: 1rem 0;
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+    left: 3px;
+  }
+  
+  .timeline-step::before {
+    width: 20px;
+    height: 20px;
+    left: 10px;
+  }
+  
+  .step-content {
+    padding: 1.25rem;
+  }
+  
+  .step-icon {
+    font-size: 1.8rem;
+  }
+  
+  .step-title {
+    font-size: 1rem;
+  }
+  
+  .decision-options {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  .process-diagram {
+  .submission-process-flow {
     padding: 1rem;
   }
   
-  .process-step {
-    min-width: 100px;
+  .process-timeline::before {
+    left: 10px;
+  }
+  
+  .timeline-step {
+    padding-left: 40px;
+    min-height: auto;
+  }
+  
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+    left: 5px;
+  }
+  
+  .timeline-step::before {
+    width: 16px;
+    height: 16px;
+    left: 12px;
+  }
+  
+  .step-content {
     padding: 1rem;
   }
   
   .step-icon {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .step-title {
+    font-size: 0.95rem;
+  }
+  
+  .step-desc {
+    font-size: 0.85rem;
+  }
+  
+  .decision-option {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .process-timeline::before {
+    left: 8px;
+  }
+  
+  .timeline-step {
+    padding-left: 35px;
+  }
+  
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+    left: 6px;
+  }
+  
+  .timeline-step::before {
+    width: 14px;
+    height: 14px;
+    left: 13px;
+  }
+  
+  .step-content {
+    padding: 0.875rem;
   }
   
   .step-title {
     font-size: 0.9rem;
   }
   
-  .step-description {
-    font-size: 0.8rem;
+  .decision-options {
+    gap: 0.5rem;
+  }
+  
+  .decision-option {
+    font-size: 0.85rem;
+    padding: 0.375rem;
   }
 }
 
@@ -2817,4 +3202,42 @@ body:has(#navbar-placeholder) .main-content h1 {
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
   }
+}
+
+/*------------------------------------
+  Loading Spinner
+------------------------------------*/
+.loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.loading-spinner.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(13, 110, 253, 0.2);
+  border-top: 5px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

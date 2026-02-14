@@ -22,8 +22,34 @@
           <li class="breadcrumb-item active">Submit Paper Online</li>
         </ol>
       </nav>
-      <h1>Submit Paper Online</h1>
-      <p>Upload your manuscript directly through our secure online portal. Supported formats: DOC, DOCX.</p>
+      <div class="submit-paper-intro">
+        <h1>Submit Paper Online</h1>
+        <p>Upload your manuscript directly through our secure online portal. Supported formats: DOC, DOCX, PDF.</p>
+        
+        <!-- Progress Indicator -->
+        <div class="progress mb-4">
+          <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Step 1 of 4</div>
+        </div>
+        
+        <div class="form-progress-steps d-flex justify-content-between mb-3">
+          <div class="step active" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-label">Basic Info</div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-label">Authors</div>
+          </div>
+          <div class="step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-label">Upload</div>
+          </div>
+          <div class="step" data-step="4">
+            <div class="step-number">4</div>
+            <div class="step-label">Submit</div>
+          </div>
+        </div>
+      </div>
       
       <form id="submissionForm">
         
@@ -68,19 +94,19 @@
 
           <div>
             <label>Country *</label>
-            <select id="country" required>
-              <option value="">Select</option>
-              <option>India</option>
-              <option>USA</option>
-              <option>UK</option>
-              <option>Germany</option>
-              <option>Canada</option>
-              <option>Australia</option>
-              <option>France</option>
-              <option>Japan</option>
-              <option>China</option>
-              <option>Other</option>
-            </select>
+            <input type="text" id="country" list="countries" placeholder="Select or enter country" required>
+            <datalist id="countries">
+              <option value="India">
+              <option value="USA">
+              <option value="UK">
+              <option value="Germany">
+              <option value="Canada">
+              <option value="Australia">
+              <option value="France">
+              <option value="Japan">
+              <option value="China">
+              <option value="Other">
+            </datalist>
           </div>
         </div>
 
@@ -102,8 +128,8 @@
         <h2 class="mt-4 mb-3">Upload Paper</h2>
 
         <div class="upload-section">
-          <input type="file" id="fileUpload" accept=".doc,.docx" required>
-          <small class="file-note">Upload Only .Doc/.Docx File</small>
+          <input type="file" id="fileUpload" accept=".doc,.docx,.pdf" required>
+          <small class="file-note">Upload Only .Doc/.Docx/.Pdf Files</small>
         </div>
 
         <div class="checkbox mt-3">

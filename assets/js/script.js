@@ -143,6 +143,144 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
     }
     
+    // Auto-save form data to localStorage
+    const autoSaveFields = ['researchArea', 'paperTitle', 'abstract', 'country'];
+    
+    autoSaveFields.forEach(fieldId => {
+      const field = document.getElementById(fieldId);
+      if (field) {
+        field.addEventListener('input', function() {
+          const formData = {};
+          autoSaveFields.forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) formData[id] = elem.value;
+          });
+          
+          // Save authors too
+          const authorRows = document.querySelectorAll('.author-row');
+          const authorsData = [];
+          authorRows.forEach((row, index) => {
+            const name = row.querySelector('.author-name')?.value || '';
+            const email = row.querySelector('.author-email')?.value || '';
+            const phone = row.querySelector('.author-phone')?.value || '';
+            const institution = row.querySelector('.author-institution')?.value || '';
+            
+            if (name || email || phone || institution) {
+              authorsData.push({name, email, phone, institution});
+            }
+          });
+          
+          formData.authors = authorsData;
+          localStorage.setItem('paperSubmissionDraft', JSON.stringify(formData));
+        });
+      }
+    });
+    
+    // Restore saved form data if it exists
+    window.addEventListener('load', function() {
+      const savedData = localStorage.getItem('paperSubmissionDraft');
+      if (savedData) {
+        try {
+          const formData = JSON.parse(savedData);
+          
+          // Restore basic fields
+          Object.keys(formData).forEach(key => {
+            if (autoSaveFields.includes(key)) {
+              const field = document.getElementById(key);
+              if (field) field.value = formData[key];
+            }
+          });
+          
+          // Restore authors
+          if (formData.authors && formData.authors.length > 0) {
+            const container = document.getElementById('authorsContainer');
+            
+            // Clear existing rows except the first one
+            const existingRows = document.querySelectorAll('.author-row:not(:first-child)');
+            existingRows.forEach(row => row.remove());
+            
+            // Fill first row
+            const firstRow = document.querySelector('.author-row');
+            if (firstRow && formData.authors[0]) {
+              const author = formData.authors[0];
+              firstRow.querySelector('.author-name')?.setAttribute('value', author.name);
+              firstRow.querySelector('.author-email')?.setAttribute('value', author.email);
+              firstRow.querySelector('.author-phone')?.setAttribute('value', author.phone);
+              firstRow.querySelector('.author-institution')?.setAttribute('value', author.institution);
+              
+              // Set values correctly
+              if (firstRow.querySelector('.author-name')) firstRow.querySelector('.author-name').value = author.name;
+              if (firstRow.querySelector('.author-email')) firstRow.querySelector('.author-email').value = author.email;
+              if (firstRow.querySelector('.author-phone')) firstRow.querySelector('.author-phone').value = author.phone;
+              if (firstRow.querySelector('.author-institution')) firstRow.querySelector('.author-institution').value = author.institution;
+            }
+            
+            // Add additional rows for remaining authors
+            for (let i = 1; i < formData.authors.length; i++) {
+              const author = formData.authors[i];
+              const authorRow = document.createElement('div');
+              authorRow.className = 'author-row';
+              authorRow.innerHTML = `
+                <input type="text" class="author-name" placeholder="Author Full Name" value="${author.name}" required>
+                <input type="email" class="author-email" placeholder="Author Email ID" value="${author.email}" required>
+                <input type="tel" class="author-phone" placeholder="Contact Number" value="${author.phone}" required>
+                <input type="text" class="author-institution" placeholder="College/Institute Name" value="${author.institution}" required>
+                <button type="button" class="btn btn-danger btn-sm remove-author">Remove</button>
+              `;
+              container.appendChild(authorRow);
+              
+              // Add event listener to the remove button
+              const removeBtn = authorRow.querySelector('.remove-author');
+              removeBtn.addEventListener('click', function() {
+                container.removeChild(authorRow);
+              });
+            }
+          }
+          
+          console.log('Restored saved form data');
+        } catch (e) {
+          console.error('Error restoring form data:', e);
+        }
+      }
+    });
+    
+    // Progress indicator functionality
+    function updateProgress(currentStep) {
+      // Update progress bar
+      const progressBar = document.querySelector('.progress-bar');
+      const progressPercent = (currentStep / 4) * 100;
+      progressBar.style.width = progressPercent + '%';
+      progressBar.setAttribute('aria-valuenow', progressPercent);
+      progressBar.textContent = `Step ${currentStep} of 4`;
+      
+      // Update step indicators
+      const steps = document.querySelectorAll('.step');
+      steps.forEach((step, index) => {
+        step.classList.remove('active', 'completed');
+        if (index + 1 < currentStep) {
+          step.classList.add('completed');
+        } else if (index + 1 === currentStep) {
+          step.classList.add('active');
+        }
+      });
+    }
+    
+    // Initialize progress indicator
+    updateProgress(1);
+    
+    // Update progress as user fills the form
+    document.getElementById('researchArea')?.addEventListener('change', function() {
+      if (this.value) updateProgress(2);
+    });
+    
+    document.getElementById('paperTitle')?.addEventListener('input', function() {
+      if (this.value.trim().length > 10) updateProgress(2);
+    });
+    
+    document.getElementById('abstract')?.addEventListener('input', function() {
+      if (this.value.trim().length > 50) updateProgress(2);
+    });
+    
     // Form submission
     submissionForm.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -222,6 +360,81 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
     });
   }
+  
+  // Mobile search functionality
+  const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+  if (mobileSearchBtn) {
+    mobileSearchBtn.addEventListener('click', function() {
+      const query = document.getElementById('mobileSearchInput')?.value || '';
+      if (query) {
+        alert('Mobile search for: ' + query);
+        // Close modal after search
+        const modalElement = document.getElementById('searchModal');
+        const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+        modal.hide();
+      } else {
+        alert('Please enter search terms.');
+      }
+    });
+  }
+  
+  // Allow Enter key to trigger search
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        document.getElementById('mobileSearchBtn').click();
+      }
+    });
+  }
+  
+  // Add back-to-top button functionality
+  const backToTopButton = document.createElement('button');
+  backToTopButton.id = 'backToTop';
+  backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+  backToTopButton.title = 'Back to Top';
+  backToTopButton.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary, #0B1F3B);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  `;
+  document.body.appendChild(backToTopButton);
+  
+  // Show/hide back-to-top button based on scroll position
+  window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 300) {
+      backToTopButton.style.opacity = '1';
+      backToTopButton.style.visibility = 'visible';
+    } else {
+      backToTopButton.style.opacity = '0';
+      backToTopButton.style.visibility = 'hidden';
+    }
+  });
+  
+  // Scroll to top when button is clicked
+  backToTopButton.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
   
   // Handle dropdown menus
   const dropdownToggles = document.querySelectorAll('.dropdown-toggle');

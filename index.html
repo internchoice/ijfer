@@ -109,6 +109,25 @@
   </main>
 
   <div id="footer-placeholder"></div>
+  
+  <!-- Mobile Search Modal -->
+  <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="searchModalLabel">Search Papers</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter keywords, author, or title..." id="mobileSearchInput">
+            <button class="btn btn-primary" type="button" id="mobileSearchBtn">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/script.js"></script>
 </body>
