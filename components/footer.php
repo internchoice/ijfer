@@ -25,9 +25,9 @@
         <h6 class="footer-heading text-center">Contact Information</h6>
         <ul class="list-unstyled contact-info text-center">
           <li><i class="fas fa-map-marker-alt me-2"></i>India</li>
-          <li><i class="fas fa-envelope me-2"></i>contact@ijfer.com</li>
+          <li><i class="fas fa-envelope me-2"></i><a href="mailto:contact@ijfer.com" class="text-white text-decoration-none">contact@ijfer.com</a></li>
           <li><i class="fas fa-phone me-2"></i>+91-XXXXXXXXXX</li>
-          <li><i class="fas fa-globe me-2"></i>www.ijfer.com</li>
+          <li><i class="fas fa-globe me-2"></i><a href="https://www.ijfer.com" class="text-white text-decoration-none" target="_blank">www.ijfer.com</a></li>
           <li><i class="fas fa-id-card me-2"></i>ISSN: 2582-5208</li>
         </ul>
       </div>
