@@ -13,10 +13,10 @@
       <div class="col-lg-4 col-md-6">
         <h6 class="footer-heading text-center">Quick Links</h6>
         <ul class="list-unstyled footer-links text-center">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="author.html">Products</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About Journal</a></li>
+          <li><a href="/pages/author/submit-paper.html">Submit Paper</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
         </ul>
       </div>
       

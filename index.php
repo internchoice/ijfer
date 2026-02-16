@@ -5,7 +5,7 @@
 
   <main class="container my-4">
     <div class="row">
-      <div id="sidebar-placeholder"></div>
+      <?php include('components/sidebar.php'); ?>
 
       <div class="col-lg-6 order-lg-2 order-1">
         <div class="main-content">
