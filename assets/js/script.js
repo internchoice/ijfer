@@ -494,3 +494,58 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
   }
 });
+
+// Auto-scrolling news section functionality with manual scroll capability
+document.addEventListener('DOMContentLoaded', function() {
+  const newsContainer = document.getElementById('newsContainer');
+  const newsScroller = document.getElementById('newsScroller');
+  
+  if (newsScroller) {
+    // Clone the news items to create seamless scrolling effect
+    const newsItems = newsScroller.innerHTML;
+    newsScroller.innerHTML = newsItems + newsItems;
+    
+    let isPaused = false;
+    let scrollPosition = 0;
+    let scrollInterval;
+    
+    // Function to start auto-scrolling
+    function startAutoScroll() {
+      if (isPaused) return;
+      
+      scrollInterval = setInterval(() => {
+        scrollPosition += 1;
+        // Reset position when reaching the end of the first set
+        if (scrollPosition >= newsScroller.scrollHeight / 2) {
+          scrollPosition = 0;
+        }
+        newsScroller.style.transform = `translateY(-${scrollPosition}px)`;
+      }, 50); // Adjust speed as needed
+    }
+    
+    // Function to pause auto-scrolling
+    function pauseAutoScroll() {
+      isPaused = true;
+      clearInterval(scrollInterval);
+    }
+    
+    // Function to resume auto-scrolling
+    function resumeAutoScroll() {
+      isPaused = false;
+      startAutoScroll();
+    }
+    
+    // Mouse enter event - pause auto-scroll
+    newsContainer.addEventListener('mouseenter', function() {
+      pauseAutoScroll();
+    });
+    
+    // Mouse leave event - resume auto-scroll
+    newsContainer.addEventListener('mouseleave', function() {
+      resumeAutoScroll();
+    });
+    
+    // Start the auto-scroll initially
+    startAutoScroll();
+  }
+});

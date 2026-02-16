@@ -92,20 +92,20 @@
   <script>
     // Past Issues Search Functionality
     document.addEventListener('DOMContentLoaded', function() {
-      // Sample past issues data
+      // Sample past issues data with dates (some older than 45 days)
       const pastIssues = [
-        { id: 1, title: "Volume 1 Issue 1", month: "June", year: 2024, volume: "Vol. I", papers: 12 },
-        { id: 2, title: "Volume 1 Issue 2", month: "July", year: 2024, volume: "Vol. I", papers: 8 },
-        { id: 3, title: "Volume 1 Issue 3", month: "August", year: 2024, volume: "Vol. I", papers: 15 },
-        { id: 4, title: "Volume 1 Issue 4", month: "September", year: 2024, volume: "Vol. I", papers: 10 },
-        { id: 5, title: "Volume 1 Issue 5", month: "October", year: 2024, volume: "Vol. I", papers: 11 },
-        { id: 6, title: "Volume 1 Issue 6", month: "November", year: 2024, volume: "Vol. I", papers: 9 },
-        { id: 7, title: "Volume 1 Issue 7", month: "December", year: 2024, volume: "Vol. I", papers: 13 },
-        { id: 8, title: "Volume 2 Issue 1", month: "January", year: 2025, volume: "Vol. II", papers: 14 },
-        { id: 9, title: "Volume 2 Issue 2", month: "February", year: 2025, volume: "Vol. II", papers: 12 },
-        { id: 10, title: "Volume 2 Issue 3", month: "March", year: 2025, volume: "Vol. II", papers: 16 },
-        { id: 11, title: "Volume 2 Issue 4", month: "April", year: 2025, volume: "Vol. II", papers: 11 },
-        { id: 12, title: "Volume 2 Issue 5", month: "May", year: 2025, volume: "Vol. II", papers: 9 }
+        { id: 1, title: "Volume 1 Issue 1", month: "June", year: 2024, volume: "Vol. I", papers: 12, date: new Date(2024, 5, 15) },
+        { id: 2, title: "Volume 1 Issue 2", month: "July", year: 2024, volume: "Vol. I", papers: 8, date: new Date(2024, 6, 15) },
+        { id: 3, title: "Volume 1 Issue 3", month: "August", year: 2024, volume: "Vol. I", papers: 15, date: new Date(2024, 7, 15) },
+        { id: 4, title: "Volume 1 Issue 4", month: "September", year: 2024, volume: "Vol. I", papers: 10, date: new Date(2024, 8, 15) },
+        { id: 5, title: "Volume 1 Issue 5", month: "October", year: 2024, volume: "Vol. I", papers: 11, date: new Date(2024, 9, 15) },
+        { id: 6, title: "Volume 1 Issue 6", month: "November", year: 2024, volume: "Vol. I", papers: 9, date: new Date(2024, 10, 15) },
+        { id: 7, title: "Volume 1 Issue 7", month: "December", year: 2024, volume: "Vol. I", papers: 13, date: new Date(2024, 11, 15) },
+        { id: 8, title: "Volume 2 Issue 1", month: "January", year: 2025, volume: "Vol. II", papers: 14, date: new Date(2025, 0, 15) },
+        { id: 9, title: "Volume 2 Issue 2", month: "February", year: 2025, volume: "Vol. II", papers: 12, date: new Date(2025, 1, 15) },
+        { id: 10, title: "Volume 2 Issue 3", month: "March", year: 2025, volume: "Vol. II", papers: 16, date: new Date(2025, 2, 15) },
+        { id: 11, title: "Volume 2 Issue 4", month: "April", year: 2025, volume: "Vol. II", papers: 11, date: new Date(2025, 3, 15) },
+        { id: 12, title: "Volume 2 Issue 5", month: "May", year: 2025, volume: "Vol. II", papers: 9, date: new Date(2025, 4, 15) }
       ];
 
       const searchInput = document.getElementById('issueSearch');
@@ -115,10 +115,46 @@
       const selectedIssue = document.getElementById('selectedIssue');
       const allIssuesGrid = document.getElementById('allIssuesGrid');
 
-      // Display all issues in grid
-      function displayAllIssues() {
+      // Filter issues by date (older than 45 days) and search term
+      function filterIssues(searchTerm = '') {
+        const cutoffDate = new Date(Date.now() - 45 * 24 * 60 * 60 * 1000); // 45 days ago
+        
+        const filteredIssues = pastIssues.filter(issue => {
+          // Check if issue is older than 45 days
+          if (issue.date >= cutoffDate) return false;
+          
+          // If search term provided, check title, month, year, and volume
+          if (searchTerm) {
+            const term = searchTerm.toLowerCase();
+            return issue.title.toLowerCase().includes(term) ||
+                   issue.month.toLowerCase().includes(term) ||
+                   issue.year.toString().includes(term) ||
+                   issue.volume.toLowerCase().includes(term);
+          }
+          
+          return true;
+        });
+        
+        return filteredIssues.sort((a, b) => b.date - a.date); // Sort by date descending
+      }
+
+      // Display filtered issues in grid
+      function displayAllIssues(issuesToShow = null) {
+        const issuesToDisplay = issuesToShow || filterIssues();
         allIssuesGrid.innerHTML = '';
-        pastIssues.forEach(issue => {
+        
+        if (issuesToDisplay.length === 0) {
+          allIssuesGrid.innerHTML = `
+            <div class="col-12 text-center py-5">
+              <i class="fas fa-history fa-3x mb-3 text-muted"></i>
+              <h4 class="text-muted">No Past Issues Found</h4>
+              <p class="text-muted">There are no issues older than 45 days or matching your search criteria.</p>
+            </div>
+          `;
+          return;
+        }
+        
+        issuesToDisplay.forEach(issue => {
           const issueCard = createIssueCard(issue);
           allIssuesGrid.appendChild(issueCard);
         });
@@ -145,6 +181,10 @@
                 <i class="fas fa-file-alt text-info me-2"></i>
                 ${issue.papers} papers
               </p>
+              <p class="card-text">
+                <i class="fas fa-clock text-warning me-2"></i>
+                Published: ${issue.date.toLocaleDateString()}
+              </p>
             </div>
             <div class="card-footer bg-transparent">
               <button class="btn btn-sm btn-outline-primary w-100 select-issue-btn" 
@@ -156,19 +196,6 @@
         `;
         
         return col;
-      }
-
-      // Filter issues based on search term
-      function filterIssues(searchTerm) {
-        if (!searchTerm.trim()) return pastIssues;
-        
-        const term = searchTerm.toLowerCase();
-        return pastIssues.filter(issue => 
-          issue.title.toLowerCase().includes(term) ||
-          issue.month.toLowerCase().includes(term) ||
-          issue.year.toString().includes(term) ||
-          issue.volume.toLowerCase().includes(term)
-        );
       }
 
       // Display filtered results in dropdown
@@ -193,6 +220,7 @@
             <div>
               <div class="fw-bold">${issue.title}</div>
               <div class="small text-muted">${issue.month} ${issue.year} • ${issue.volume} • ${issue.papers} papers</div>
+              <div class="small text-muted">Published: ${issue.date.toLocaleDateString()}</div>
             </div>
             <i class="fas fa-chevron-right text-muted"></i>
           `;
@@ -219,7 +247,7 @@
             </div>
             <div class="col-md-6">
               <p><i class="fas fa-file-alt text-info me-2"></i><strong>Papers:</strong> ${issue.papers} research papers</p>
-              <p><i class="fas fa-barcode text-warning me-2"></i><strong>Issue ID:</strong> #${issue.id}</p>
+              <p><i class="fas fa-clock text-warning me-2"></i><strong>Published:</strong> ${issue.date.toLocaleDateString()}</p>
             </div>
           </div>
         `;
@@ -281,9 +309,9 @@
         }
       });
 
-      // Initialize
+      // Initialize with issues older than 45 days
       displayAllIssues();
-      showDropdownResults(pastIssues);
+      showDropdownResults(filterIssues());
     });
   </script>
 </body>
