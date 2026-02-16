@@ -495,6 +495,33 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 
+// Function to calculate and display the last date of the current month
+function updateSubmissionDeadline() {
+  const deadlineElement = document.getElementById('submissionDeadline');
+  if (!deadlineElement) return;
+  
+  // Get the current date
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth(); // Month is zero-indexed (0-11)
+  
+  // Calculate the last day of the current month
+  // By getting the 0th day of the next month, we get the last day of current month
+  const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+  
+  // Format the date as DD-MMM-YYYY
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const formattedDate = `${lastDay.toString().padStart(2, '0')}-${months[currentMonth]}-${currentYear}`;
+  
+  // Update the element with the calculated date
+  deadlineElement.textContent = formattedDate;
+}
+
+// Initialize the submission deadline on page load
+document.addEventListener('DOMContentLoaded', function() {
+  updateSubmissionDeadline();
+});
+
 // Auto-scrolling news section functionality with manual scroll capability
 document.addEventListener('DOMContentLoaded', function() {
   const newsContainer = document.getElementById('newsContainer');

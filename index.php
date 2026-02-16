@@ -12,7 +12,7 @@
           <h1>Welcome to IJFER</h1>
           <div class="alert alert-primary">
             <h3 class="h5 mb-2">Call For Papers</h3>
-            <p class="mb-1"><strong>Submission Last Date:</strong> 30-Jun-2025</p>
+            <p class="mb-1"><strong>Submission Deadline:</strong> <span id="submissionDeadline">30-Jun-2025</span></p>
             <p class="mb-1"><strong>Review Status:</strong> 24 hours</p>
             <p class="mb-0"><strong>Paper Publication:</strong> 4 hours | DOI Service Started</p>
           </div>
