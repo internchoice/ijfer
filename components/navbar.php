@@ -5,56 +5,60 @@
     </button>
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        
+
+        <li class="nav-item">
+          <a class="nav-link" href="BASE">Home</a>
+        </li>
+
         <!-- About Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
             About
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/pages/about/editor-vision.html">Editor Vision</a></li>
-            <li><a class="dropdown-item" href="/pages/about/editorial-board.html">Editorial Board</a></li>
-            <li><a class="dropdown-item" href="/pages/about/terms-conditions.html">Terms & Conditions</a></li>
-            <li><a class="dropdown-item" href="/pages/about/privacy-policy.html">Privacy Policy</a></li>
-            <li><a class="dropdown-item" href="/pages/about/publication-ethics.html">Publication Ethics</a></li>
-            <li><a class="dropdown-item" href="/pages/about/peer-review.html">Peer Review Process</a></li>
+            <li><a class="dropdown-item" href="BASEpages/about/editor-vision.php">Editor Vision</a></li>
+            <li><a class="dropdown-item" href="BASEpages/about/edi-board.php">Editorial Board</a></li>
+            <li><a class="dropdown-item" href="BASEpages/about/terms-conditions.php">Terms & Conditions</a></li>
+            <li><a class="dropdown-item" href="BASEpages/about/privacy-policy.php">Privacy Policy</a></li>
+            <li><a class="dropdown-item" href="BASEpages/about/publication-ethics.php">Publication Ethics</a></li>
+            <li><a class="dropdown-item" href="BASEpages/about/peer-review.php">Peer Review Process</a></li>
           </ul>
         </li>
-        
+
         <!-- Author Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
             Author
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/pages/author/submission-process.html">Publication Process</a></li>
-            <li><a class="dropdown-item" href="/pages/author/submit-paper.html">Submit Paper Online</a></li>
-            <li><a class="dropdown-item" href="/pages/author/pay-fee.html">Pay Publication Fee</a></li>
-            <li><a class="dropdown-item" href="/pages/author/track-paper.html">Track Paper</a></li>
-            <li><a class="dropdown-item" href="/pages/author/copyright.html">Copyright Form</a></li>
-            <li><a class="dropdown-item" href="/pages/author/templates.html">Sample Paper Format</a></li>
-            <li><a class="dropdown-item" href="/pages/author/call-for-papers.html">Topics / Call for Papers</a></li>
+            <li><a class="dropdown-item" href="BASEpages/author/submission-process.php">Publication Process</a></li>
+            <li><a class="dropdown-item" href="BASEpages/author/submit-paper.php">Submit Paper Online</a></li>
+            <li><a class="dropdown-item" href="BASEpages/author/pay-fee.php">Pay Publication Fee</a></li>
+            <li><a class="dropdown-item" href="BASEpages/author/track-paper.php">Track Paper</a></li>
+            <li><a class="dropdown-item" href="BASEpages/author/copyright.php">Copyright Form</a></li>
+            <li><a class="dropdown-item" href="BASEpages/author/templates.php">Sample Paper Format</a></li>
+            <li><a class="dropdown-item" href="BASEpages/author/call-for-papers.php">Topics / Call for Papers</a></li>
           </ul>
         </li>
-        
+
         <!-- Archives Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
             Archives
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/pages/archives/current-issue.html">Current Issue</a></li>
-            <li><a class="dropdown-item" href="/pages/archives/past-issues.html">Past Issues</a></li>
-            <li><a class="dropdown-item" href="/pages/archives/search.html">Search Papers</a></li>
+            <li><a class="dropdown-item" href="BASEpages/archives/current-issue.php">Current Issue</a></li>
+            <li><a class="dropdown-item" href="BASEpages/archives/past-issue.php">Past Issues</a></li>
+            <li><a class="dropdown-item" href="BASEpages/archives/search.php">Search Papers</a></li>
           </ul>
         </li>
-        
-        <li class="nav-item"><a class="nav-link" href="/indexing.html">Indexing</a></li>
-        <li class="nav-item"><a class="nav-link" href="/fees.html">Fees</a></li>
-        <li class="nav-item"><a class="nav-link" href="/conference.html">Conference</a></li>
-        <li class="nav-item"><a class="nav-link" href="/faq.html">FAQ</a></li>
-        <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
+
+        <li class="nav-item"><a class="nav-link" href="BASEindexing.php">Indexing</a></li>
+        <li class="nav-item"><a class="nav-link" href="BASEfees.php">Fees</a></li>
+        <li class="nav-item"><a class="nav-link" href="BASEconference.php">Conference</a></li>
+        <li class="nav-item"><a class="nav-link" href="BASEfaq.php">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="BASEcontact.php">Contact</a></li>
+
       </ul>
     </div>
   </div>

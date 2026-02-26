@@ -1,95 +1,130 @@
-<?php include('components/header.php'); ?>
+<?php
+require_once 'admin/config/db.php'; // Include your database connection
+
+// Fetch latest 10 news from the database
+try {
+    $stmt = $pdo->query("SELECT * FROM news ORDER BY created_at DESC LIMIT 10");
+    $newsItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $newsItems = [];
+    error_log("News fetch error: " . $e->getMessage());
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IJFER - Indian Journals for Engineering and Research | Peer-Reviewed Open Access Journal</title>
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
 <body>
-  <!-- <div id="header-placeholder"></div>
-  <div id="navbar-placeholder"></div> -->
+  <?php include __DIR__ . "/components/header.php"; ?>
+  <div id="navbar-placeholder"></div>
 
-  <main class="container my-4">
+  <main class="container-fluid my-4">
     <div class="row">
-      <?php include('components/sidebar.php'); ?>
+      <div id="sidebar-placeholder"></div>
 
-      <div class="col-lg-6 order-lg-2 order-1">
+      <div class="col-lg-5 order-lg-2 order-1">
         <div class="main-content">
           <h1>Welcome to IJFER</h1>
           <div class="alert alert-primary">
-            <h3 class="h5 mb-2">Call For Papers</h3>
+            <h3 class="h5 mb-2">Call for Papers</h3>
             <p class="mb-1"><strong>Submission Deadline:</strong> <span id="submissionDeadline">30-Jun-2025</span></p>
-            <p class="mb-1"><strong>Review Status:</strong> 24 hours</p>
-            <p class="mb-0"><strong>Paper Publication:</strong> 4 hours | DOI Service Started</p>
+            <p class="mb-1"><strong>Review Time:</strong> Within 24 hours</p>
+            <p class="mb-0"><strong>Publication Timeline:</strong> Within 4 hours after receipt of publication fee and copyright form | DOI Service Available</p>
           </div>
 
-          <p>IJFER is a peer-reviewed, Open Access, low cost journal with fast processing that publishes original research articles as well as review articles in several areas of engineering, science and technology for the enhancement of scientific research work. IJFER enables its readers to access the published articles free of cost which helps in spreading knowledge, thereby guaranteeing scholars, scientists, academicians, engineers and students of engineering and technology for reading, reprinting, and distributing to facilitate academic and research activities.</p>
+          <p>IJFER is a peer-reviewed, open-access journal dedicated to publishing original research articles and review papers in the fields of engineering, science, and technology. The journal aims to promote high-quality scholarly work and facilitate the dissemination of scientific knowledge. All published articles are freely accessible, enabling scholars, scientists, academicians, engineers, and students to read, download, share, and distribute research to support academic and professional development.</p>
 
           <h2>Key Features</h2>
           <div class="row">
             <div class="col-md-6">
               <div class="feature-card">
                 <strong>Peer-Reviewed</strong>
-                <p class="mb-0 small">All submissions undergo rigorous peer review by experts.</p>
+                <p class="mb-0 small">All submissions undergo a rigorous peer-review process conducted by subject-matter experts.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="feature-card">
                 <strong>Open Access</strong>
-                <p class="mb-0 small">Free access to all published articles worldwide.</p>
+                <p class="mb-0 small">All published articles are freely accessible to readers worldwide.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="feature-card">
-                <strong>Fast Publication</strong>
-                <p class="mb-0 small">Publication within 4 hours after fee and copyright form received.</p>
+                <strong>Rapid Publication</strong>
+                <p class="mb-0 small">Publication is completed within 4 hours after confirmation of fee payment and required documentation.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="feature-card">
-                <strong>Monthly Publication</strong>
-                <p class="mb-0 small">Regular monthly issues to disseminate research quickly.</p>
+                <strong>Monthly Issues</strong>
+                <p class="mb-0 small">Regular monthly issues ensure timely dissemination of research findings.</p>
               </div>
             </div>
           </div>
 
           <h2>Our Journal Services</h2>
           <ul>
-            Our Journal Services:
-              <li>Low cost Journal</li>
-              <li>Fast response after received paper within 6 hours.</li>
-              <li>Fast paper publication within 4 hours after receiving publication fees and copyright form.</li>
-              <li>Provide DOI</li>
-              <li>Low publication fees.</li>
-              <li>Paper id is provided to track paper process.</li>
-              <li>Simple and fast paper submission process.</li>
-              <li>Free open access journal.</li>
-              <li>Monthly paper publication.</li>
-              <li>Provide free soft copy of certificate of publication to each author.</li>
-              <li>Provide hard copy of paper publication certificate to each author</li>
-              <li>Secure payment gateway.</li>
-              <li>Strictly goes through plagiarism process.</li>
-              <li>Paper can be submitted by authors any day any time.</li>
-              <li>Accepted paper publication fees paid by authors online by Debit Card/ Credit Card/Net Banking/ Paytm /Phone Pe/ Bhim/Googlepay or any other UPI app</li>
-              <li>Publication Guidelines- COPE Guidelines</li>
-              <li>24*7 authors query or problem resolving system</li>
+            <li>Affordable publication fees</li>
+            <li>Initial response within 6 hours of manuscript submission</li>
+            <li>Rapid publication after receipt of publication fee and copyright form</li>
+            <li>DOI assigned to all published papers</li>
+            <li>Unique Paper ID provided for tracking submission status</li>
+            <li>Simple and efficient manuscript submission process</li>
+            <li>Open-access publication model</li>
+            <li>Monthly publication cycle</li>
+            <li>Digital copy of publication certificate provided to each author</li>
+            <li>Printed copy of publication certificate available upon request</li>
+            <li>Secure online payment gateway</li>
+            <li>Strict plagiarism screening prior to publication</li>
+            <li>Manuscripts may be submitted throughout the year</li>
+            <li>Publication fees can be paid online via Debit Card, Credit Card, Net Banking, Paytm, PhonePe, BHIM, Google Pay, or other UPI applications</li>
+            <li>Publication ethics maintained in accordance with COPE guidelines</li>
+            <li>24/7 author support and query resolution assistance</li>
           </ul>
         </div>
       </div>
 
-      <aside class="col-lg-3 order-3">
+      <aside class="col-lg-4 order-3">
         <div class="sidebar-panel">
           <h5>Latest News & Announcements</h5>
-          <div class="news-item">
-            <span class="date">Feb 2025</span>
-            <p class="mb-0">DOI service now active for all published papers.</p>
-          </div>
-          <div class="news-item">
-            <span class="date">Jan 2025</span>
-            <p class="mb-0">New volume released. Submit your research papers.</p>
-          </div>
-          <div class="news-item">
-            <span class="date">Dec 2024</span>
-            <p class="mb-0">Indexed in additional international databases.</p>
+          <div class="news-container" id="newsContainer">
+            <div class="news-scroller" id="newsScroller">
+              <?php if(!empty($newsItems)): ?>
+                <?php 
+                $newBadgeCount = 0;
+                foreach($newsItems as $index => $news): 
+                  $showNewBadge = ($index < 4 && $newBadgeCount < 4);
+                  if($showNewBadge) $newBadgeCount++;
+                ?>
+                  <div class="news-item <?= $showNewBadge ? 'news-latest' : '' ?>">
+                    <?php if($showNewBadge): ?>
+                      <span class="news-badge">NEW</span>
+                    <?php endif; ?>
+                    <span class="date"><?= date('M Y', strtotime($news['created_at'])) ?></span>
+                    <h6 class="news-heading"><?= htmlspecialchars($news['heading']) ?></h6>
+                    <p class="mb-0"><?= htmlspecialchars($news['description']) ?></p>
+                    <?php if(!empty($news['pdf_file'])): ?>
+                      <a href="<?= htmlspecialchars($news['pdf_file']) ?>" class="news-link" target="_blank">Read more</a>
+                    <?php endif; ?>
+                  </div>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <p>No news found.</p>
+              <?php endif; ?>
+            </div>
           </div>
         </div>
+
         <div class="sidebar-panel">
           <h5>Indexing & Abstracting</h5>
-          <p class="small">IJFER is indexed and abstracted in leading international databases including Google Scholar, ResearchGate, and academic repositories worldwide.</p>
+          <p class="small">IJFER is indexed and abstracted in recognized international databases, including Google Scholar, ResearchGate, and other academic repositories.</p>
           <div class="indexing-logos">
             <span class="badge bg-secondary">Google Scholar</span>
             <span class="badge bg-secondary">ResearchGate</span>
@@ -100,9 +135,66 @@
     </div>
   </main>
 
-  <!-- <div id="footer-placeholder"></div> -->
-   <?php include('components/footer.php'); ?>
+  <?php include __DIR__ . "/components/footer.php"; ?>
+
+  <!-- Mobile Search Modal -->
+  <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="searchModalLabel">Search Papers</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter keywords, author, or title..." id="mobileSearchInput">
+            <button class="btn btn-primary" type="button" id="mobileSearchBtn">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/script.js"></script>
+
+  <script>
+  // Auto-scroll for news
+  document.addEventListener('DOMContentLoaded', function() {
+    const newsContainer = document.getElementById('newsContainer');
+    const newsScroller = document.getElementById('newsScroller');
+
+    if (newsScroller) {
+      let isPaused = false;
+      let scrollPosition = 0;
+      let scrollInterval;
+
+      function startAutoScroll() {
+        if (isPaused) return;
+        scrollInterval = setInterval(() => {
+          scrollPosition += 1;
+          if (scrollPosition >= newsScroller.scrollHeight - newsContainer.offsetHeight) {
+            scrollPosition = 0;
+          }
+          newsScroller.style.transform = `translateY(-${scrollPosition}px)`;
+        }, 50);
+      }
+
+      function pauseAutoScroll() {
+        isPaused = true;
+        clearInterval(scrollInterval);
+      }
+      function resumeAutoScroll() {
+        isPaused = false;
+        startAutoScroll();
+      }
+
+      newsContainer.addEventListener('mouseenter', pauseAutoScroll);
+      newsContainer.addEventListener('mouseleave', resumeAutoScroll);
+
+      startAutoScroll();
+    }
+  });
+  </script>
 </body>
 </html>
