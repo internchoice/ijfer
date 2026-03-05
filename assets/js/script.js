@@ -596,42 +596,33 @@ document.addEventListener("DOMContentLoaded", function () {
   const newsContainer = document.getElementById("newsContainer");
   const newsScroller = document.getElementById("newsScroller");
 
-  if (newsScroller) {
-    let isPaused = false;
-    let scrollPosition = 0;
-    let scrollInterval;
+  if (!newsContainer || !newsScroller) return;
 
-    // Function to start auto-scrolling
-    function startAutoScroll() {
-      if (isPaused) return;
-      scrollInterval = setInterval(() => {
-        scrollPosition += 1;
-        // Reset position when reaching the end of the news scroller
-        if (
-          scrollPosition >=
-          newsScroller.scrollHeight - newsContainer.offsetHeight
-        ) {
-          scrollPosition = 0;
-        }
-        newsScroller.style.transform = `translateY(-${scrollPosition}px)`;
-      }, 50); // Adjust speed if needed
+  let speed = 1; // 1 = smooth
+  let delay = 30; // lower = faster, higher = slower
+  let isPaused = false;
+
+  // Duplicate content only once
+  newsScroller.innerHTML += newsScroller.innerHTML;
+
+  function smoothScroll() {
+    if (!isPaused) {
+      newsContainer.scrollTop += speed;
+
+      // When reaching half (original content height)
+      if (newsContainer.scrollTop >= newsScroller.scrollHeight / 2) {
+        newsContainer.scrollTop = 0;
+      }
     }
-
-    // Pause/Resume
-    function pauseAutoScroll() {
-      isPaused = true;
-      clearInterval(scrollInterval);
-    }
-    function resumeAutoScroll() {
-      isPaused = false;
-      startAutoScroll();
-    }
-
-    // Mouse events
-    newsContainer.addEventListener("mouseenter", pauseAutoScroll);
-    newsContainer.addEventListener("mouseleave", resumeAutoScroll);
-
-    // Start scrolling
-    startAutoScroll();
   }
+
+  let scrollInterval = setInterval(smoothScroll, delay);
+
+  newsContainer.addEventListener("mouseenter", () => {
+    isPaused = true;
+  });
+
+  newsContainer.addEventListener("mouseleave", () => {
+    isPaused = false;
+  });
 });

@@ -1,88 +1,212 @@
+<?php
+// Optional: you can add PHP logic later (e.g., countdown end date, email signup)
+$launchDate = "2026-06-01"; // example — change to your actual target date
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indexing - IJFER</title>
+  <title>Coming Soon - IJFER</title>
   <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../assets/css/style.css">
+
+  <style>
+    body {
+      background: #f8f9fa;
+      color: #2b2b2b;
+    }
+
+    .coming-soon-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, rgba(11,31,59,0.04) 0%, rgba(198,167,94,0.04) 100%);
+    }
+
+    .coming-soon-card {
+      max-width: 780px;
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(11,31,59,0.12);
+      text-align: center;
+      padding: 4.5rem 2.5rem;
+    }
+
+    .logo-container {
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-container img {
+      max-width: 220px;
+      height: auto;
+    }
+
+    .main-heading {
+      font-size: 3.8rem;
+      font-weight: 800;
+      color: #0b1f3b;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .sub-heading {
+      font-size: 1.45rem;
+      color: #5a5a5a;
+      margin-bottom: 3rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      margin: 3rem 0 4rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-box {
+      background: #0b1f3b;
+      color: white;
+      padding: 1.4rem 1.8rem;
+      border-radius: 12px;
+      min-width: 110px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(11,31,59,0.25);
+    }
+
+    .countdown-number {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    .email-form {
+      max-width: 520px;
+      margin: 0 auto 3rem;
+    }
+
+    .email-form .input-group {
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .email-form .form-control {
+      border: none;
+      padding: 1.1rem 1.6rem;
+      font-size: 1.1rem;
+    }
+
+    .email-form .btn {
+      background: #c6a75e;
+      border: none;
+      color: #0b1f3b;
+      font-weight: 600;
+      padding: 0 2.5rem;
+      transition: all 0.3s;
+    }
+
+    .email-form .btn:hover {
+      background: #b8964a;
+      transform: translateY(-2px);
+    }
+
+    .social-icons a {
+      color: #2f5d8a;
+      font-size: 2rem;
+      margin: 0 1rem;
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #c6a75e;
+      transform: translateY(-4px);
+    }
+
+    @media (max-width: 576px) {
+      .main-heading { font-size: 2.8rem; }
+      .countdown-box { min-width: 85px; padding: 1rem; }
+      .countdown-number { font-size: 2.4rem; }
+    }
+  </style>
 </head>
 <body>
-  <?php include __DIR__ . "/components/header.php"; ?>
-  <div id="navbar-placeholder"></div>
 
-  <main class="container my-4">
-    <div class="main-content">
-      <!-- <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../index.php">Home</a></li>
-          <li class="breadcrumb-item active">Indexing</li>
-        </ol> -->
-      </nav>
-      
-      <h1>Indexing & Abstracting</h1>
-      <p class="lead">IJFER is indexed and abstracted in leading international databases, ensuring wide visibility and accessibility of published research. Our comprehensive indexing strategy maximizes the impact and reach of scholarly work.</p>
-      
-      <!-- Indexing Databases Section -->
-      <div class="indexing-section mb-5">
-        <h2 class="mb-4">Our Indexing Partners</h2>
-        <div class="row">
-          <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind1.png" alt="Indexing Partner 1" class="img-fluid indexing-image">
-          </div>
-          
-          <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind2.jpg" alt="Indexing Partner 2" class="img-fluid indexing-image">
-          </div>
-          
-          <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind3.jpg" alt="Indexing Partner 3" class="img-fluid indexing-image">
-          </div>
-          
-          <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind4.jpg" alt="Indexing Partner 4" class="img-fluid indexing-image">
-          </div>
-          
-          <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind5.png" alt="Indexing Partner 5" class="img-fluid indexing-image">
-          </div>
-          
-          <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind6.png" alt="Indexing Partner 6" class="img-fluid indexing-image">
-          </div>
-        </div>
-      </div>
-      
-      <!-- Policy Section -->
-      <div class="policy-section">
-        <h2 class="mb-4">Indexing Policy</h2>
-        <div class="policy-content">
-          <p>IJFER actively pursues indexing in major academic databases to maximize the visibility and impact of published research. Our comprehensive indexing strategy includes:</p>
-          <ul>
-            <li><strong>Regular Submissions:</strong> We submit metadata to indexing services on a monthly basis to ensure timely inclusion of new publications</li>
-            <li><strong>Quality Standards:</strong> Maintain rigorous quality standards for all published content to meet indexing database requirements</li>
-            <li><strong>DOI Management:</strong> Ensure proper DOI assignment and registration for all articles through Crossref</li>
-            <li><strong>Compliance:</strong> Adhere to indexing database requirements, standards, and best practices for metadata quality</li>
-            <li><strong>Continuous Expansion:</strong> Actively work to expand our indexing coverage in premium databases and new platforms</li>
-            <li><strong>Performance Monitoring:</strong> Track indexing performance and citation metrics to optimize visibility strategies</li>
-            <li><strong>Author Benefits:</strong> Provide authors with indexing information and citation tracking for their published work</li>
-          </ul>
-          <div class="alert alert-info mt-3">
-            <h5><i class="fas fa-info-circle"></i> For Authors</h5>
-            <p>All published articles automatically receive indexing benefits. Authors can track their article's indexing status and citation metrics through our author portal. For specific inquiries about indexing or to suggest new databases for inclusion, please contact our editorial team.</p>
-          </div>
-          <p class="mt-3">For inquiries about indexing or to suggest new databases for inclusion, please contact our editorial team at <a href="mailto:editor@IJFER.com">editor@IJFER.com</a>.</p>
-        </div>
-      </div>
-      
+<?php include __DIR__ . "/components/header.php"; ?>
+<div id="navbar-placeholder"></div>
 
+<div class="coming-soon-wrapper">
+  <div class="coming-soon-card">
+    <div class="logo-container">
+      <img src="assets/images/logo.png" alt="IJFER Logo">
     </div>
-  </main>
 
-  <?php include __DIR__ . "/components/footer.php"; ?>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/js/script.js"></script>
+    <h1 class="main-heading">Coming Soon</h1>
+    <p class="sub-heading">
+      We're preparing something exciting for the research community. Stay tuned — launching very soon!
+    </p>
+
+    <!-- Countdown (static for now — can make live with JS later) -->
+    <!-- <div class="countdown-container">
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div> -->
+
+    <!-- Optional email notification form -->
+    <!-- <form class="email-form">
+      <div class="input-group">
+        <input type="email" class="form-control" placeholder="Enter your email for launch updates..." required>
+        <button class="btn px-4" type="submit">Notify Me</button>
+      </div>
+    </form> -->
+
+    <!-- Social links -->
+    <!-- <div class="social-icons mt-5">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <p class="text-muted mt-5 small">
+      International Journal of Futuristic Engineering Research<br>
+      © <?= date('Y') ?> IJFER — All Rights Reserved
+    </p> -->
+  </div>
+</div>
+
+<?php include __DIR__ . "/components/footer.php"; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

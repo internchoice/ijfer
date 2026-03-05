@@ -1,196 +1,212 @@
+<?php
+// Optional: you can add PHP logic later (e.g., countdown end date, email signup)
+$launchDate = "2026-06-01"; // example — change to your actual target date
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conferences - IJFER</title>
+  <title>Coming Soon - IJFER</title>
   <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../assets/css/style.css">
+
+  <style>
+    body {
+      background: #f8f9fa;
+      color: #2b2b2b;
+    }
+
+    .coming-soon-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, rgba(11,31,59,0.04) 0%, rgba(198,167,94,0.04) 100%);
+    }
+
+    .coming-soon-card {
+      max-width: 780px;
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(11,31,59,0.12);
+      text-align: center;
+      padding: 4.5rem 2.5rem;
+    }
+
+    .logo-container {
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-container img {
+      max-width: 220px;
+      height: auto;
+    }
+
+    .main-heading {
+      font-size: 3.8rem;
+      font-weight: 800;
+      color: #0b1f3b;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .sub-heading {
+      font-size: 1.45rem;
+      color: #5a5a5a;
+      margin-bottom: 3rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      margin: 3rem 0 4rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-box {
+      background: #0b1f3b;
+      color: white;
+      padding: 1.4rem 1.8rem;
+      border-radius: 12px;
+      min-width: 110px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(11,31,59,0.25);
+    }
+
+    .countdown-number {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .countdown-label {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    .email-form {
+      max-width: 520px;
+      margin: 0 auto 3rem;
+    }
+
+    .email-form .input-group {
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .email-form .form-control {
+      border: none;
+      padding: 1.1rem 1.6rem;
+      font-size: 1.1rem;
+    }
+
+    .email-form .btn {
+      background: #c6a75e;
+      border: none;
+      color: #0b1f3b;
+      font-weight: 600;
+      padding: 0 2.5rem;
+      transition: all 0.3s;
+    }
+
+    .email-form .btn:hover {
+      background: #b8964a;
+      transform: translateY(-2px);
+    }
+
+    .social-icons a {
+      color: #2f5d8a;
+      font-size: 2rem;
+      margin: 0 1rem;
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #c6a75e;
+      transform: translateY(-4px);
+    }
+
+    @media (max-width: 576px) {
+      .main-heading { font-size: 2.8rem; }
+      .countdown-box { min-width: 85px; padding: 1rem; }
+      .countdown-number { font-size: 2.4rem; }
+    }
+  </style>
 </head>
 <body>
-  <?php include __DIR__ . "/components/header.php"; ?>
-  <div id="navbar-placeholder"></div>
 
-  <main class="container my-4">
-    <div class="main-content">
+<?php include __DIR__ . "/components/header.php"; ?>
+<div id="navbar-placeholder"></div>
 
-      
-      <h1>Academic Conferences</h1>
-      <!-- 
-      <p class="lead">IJFER organizes and participates in international conferences to promote academic exchange and research collaboration.</p>
-      <div class="upcoming-conferences mb-5">
-        <h2 class="mb-4">Upcoming Conferences</h2>
-        
-        <div class="conference-card mb-4">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="conference-date bg-primary text-white text-center p-3 rounded">
-                <div class="date-month">MAR</div>
-                <div class="date-day">15-17</div>
-                <div class="date-year">2025</div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="conference-details">
-                <h4>International Conference on Engineering & Technology</h4>
-                <p class="conference-location"><i class="fas fa-map-marker-alt text-danger me-2"></i>Nashik, Maharashtra, India</p>
-                <p class="conference-description">A premier international conference focusing on recent advances in engineering, technology, and interdisciplinary research. Topics include AI, IoT, sustainable engineering, and emerging technologies.</p>
-                <div class="conference-meta">
-                  <span class="badge bg-success me-2">Registration Open</span>
-                  <span class="badge bg-info">Virtual Participation Available</span>
-                </div>
-                <div class="mt-3">
-                  <a href="#" class="btn btn-primary me-2">Register Now</a>
-                  <a href="#" class="btn btn-outline-primary">View Details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="conference-card mb-4">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="conference-date bg-success text-white text-center p-3 rounded">
-                <div class="date-month">MAY</div>
-                <div class="date-day">22-24</div>
-                <div class="date-year">2025</div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="conference-details">
-                <h4>Research Innovation Summit 2025</h4>
-                <p class="conference-location"><i class="fas fa-map-marker-alt text-danger me-2"></i>Virtual Conference</p>
-                <p class="conference-description">An online research summit bringing together scholars, researchers, and industry experts to discuss cutting-edge research and innovation across multiple disciplines.</p>
-                <div class="conference-meta">
-                  <span class="badge bg-warning text-dark me-2">Abstract Submission</span>
-                  <span class="badge bg-info">International Participants</span>
-                </div>
-                <div class="mt-3">
-                  <a href="#" class="btn btn-success me-2">Submit Abstract</a>
-                  <a href="#" class="btn btn-outline-success">Conference Program</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="conference-card">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="conference-date bg-info text-white text-center p-3 rounded">
-                <div class="date-month">AUG</div>
-                <div class="date-day">08-10</div>
-                <div class="date-year">2025</div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="conference-details">
-                <h4>Annual Science & Technology Conference</h4>
-                <p class="conference-location"><i class="fas fa-map-marker-alt text-danger me-2"></i>Nashik, Maharashtra, India</p>
-                <p class="conference-description">The annual gathering of scientists, researchers, and academicians to present and discuss the latest developments in science and technology research.</p>
-                <div class="conference-meta">
-                  <span class="badge bg-secondary me-2">Call for Papers</span>
-                  <span class="badge bg-primary">Peer-reviewed Proceedings</span>
-                </div>
-                <div class="mt-3">
-                  <a href="#" class="btn btn-info me-2">Call for Papers</a>
-                  <a href="#" class="btn btn-outline-info">Important Dates</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      -->
-      
-      <div class="coming-soon-section text-center mb-5">
-        
-        <div class="alert alert-info">
-          <h3 class="mb-3"><i class="fas fa-calendar-plus me-2"></i>Coming Soon</h3>
-          <p class="mb-0">We're currently planning exciting conferences and events. Please check back later for upcoming conference announcements and registration details.</p>
-        </div>
-      </div>
-      
-      <div class="conference-benefits mb-5">
-        <h2 class="mb-4">Why Participate in IJFER Conferences?</h2>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <div class="benefit-card text-center">
-              <div class="benefit-icon text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-users fa-2x"></i>
-              </div>
-              <h5>Networking Opportunities</h5>
-              <p>Connect with leading researchers, academicians, and industry professionals from around the world.</p>
-            </div>
-          </div>
-          
-          <div class="col-md-4 mb-3">
-            <div class="benefit-card text-center">
-              <div class="benefit-icon text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-book-open fa-2x"></i>
-              </div>
-              <h5>Publication Opportunities</h5>
-              <p>Presented papers are considered for publication in IJFER journal with fast-track review process.</p>
-            </div>
-          </div>
-          
-          <div class="col-md-4 mb-3">
-            <div class="benefit-card text-center">
-              <div class="benefit-icon text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
-                <i class="fas fa-certificate fa-2x"></i>
-              </div>
-              <h5>Certification</h5>
-              <p>Receive participation certificates and presentation certificates for all registered participants.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="participation-info">
-        <h2 class="mb-4">Participation Information</h2>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="info-card mb-4">
-              <h4><i class="fas fa-user-graduate text-primary me-2"></i>For Authors</h4>
-              <ul>
-                <li>Submit abstracts for presentation consideration</li>
-                <li>Full papers for journal publication consideration</li>
-                <li>Registration includes conference proceedings</li>
-                <li>Special discounts for student participants</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="info-card mb-4">
-              <h4><i class="fas fa-chalkboard-teacher text-success me-2"></i>For Speakers</h4>
-              <ul>
-                <li>Keynote and invited speaker opportunities</li>
-                <li>Professional presentation guidelines provided</li>
-                <li>Technical support during presentations</li>
-                <li>Speaker certificates and recognition</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="contact-section bg-light p-4 rounded">
-          <h4 class="mb-3">Contact Information</h4>
-          <p>For conference inquiries, registration, and participation details:</p>
-          <p><i class="fas fa-envelope text-primary me-2"></i><strong>Email:</strong> conference@IJFER.com</p>
-          <p><i class="fas fa-phone text-success me-2"></i><strong>Phone:</strong> +91 786-969-67-94</p>
-          <p class="mb-0"><i class="fas fa-globe text-info me-2"></i><strong>Website:</strong> www.IJFER.com/conference</p>
-        </div>
-      </div>
-      
-      <p class="mt-4"><a href="../../index.php" class="btn btn-outline-primary">← Back to Home</a></p>
+<div class="coming-soon-wrapper">
+  <div class="coming-soon-card">
+    <div class="logo-container">
+      <img src="assets/images/logo.png" alt="IJFER Logo">
     </div>
-  </main>
 
-  <?php include __DIR__ . "/components/footer.php"; ?>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/js/script.js"></script>
+    <h1 class="main-heading">Coming Soon</h1>
+    <p class="sub-heading">
+      We're preparing something exciting for the research community. Stay tuned — launching very soon!
+    </p>
+
+    <!-- Countdown (static for now — can make live with JS later) -->
+    <!-- <div class="countdown-container">
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number">00</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div> -->
+
+    <!-- Optional email notification form -->
+    <!-- <form class="email-form">
+      <div class="input-group">
+        <input type="email" class="form-control" placeholder="Enter your email for launch updates..." required>
+        <button class="btn px-4" type="submit">Notify Me</button>
+      </div>
+    </form> -->
+
+    <!-- Social links -->
+    <!-- <div class="social-icons mt-5">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <p class="text-muted mt-5 small">
+      International Journal of Futuristic Engineering Research<br>
+      © <?= date('Y') ?> IJFER — All Rights Reserved
+    </p> -->
+  </div>
+</div>
+
+<?php include __DIR__ . "/components/footer.php"; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

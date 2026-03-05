@@ -7,48 +7,66 @@ $errorMessage = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $heading = trim($_POST['heading'] ?? '');
     $description = trim($_POST['description'] ?? '');
+    $link = trim($_POST['news_link'] ?? '');
+
+    $pdfUploaded = isset($_FILES['pdf_file']) && $_FILES['pdf_file']['error'] === 0;
+    $filePath = null;
 
     if ($heading === '' || $description === '') {
         $errorMessage = "Heading and Description are required.";
-    } elseif (!isset($_FILES['pdf_file']) || $_FILES['pdf_file']['error'] !== 0) {
-        $errorMessage = "Please upload a valid PDF file.";
+    } elseif (!$pdfUploaded && $link === '') {
+        $errorMessage = "Please upload a PDF file or provide a news link.";
     } else {
-        $ext = strtolower(pathinfo($_FILES['pdf_file']['name'], PATHINFO_EXTENSION));
-        if ($ext !== 'pdf') {
-            $errorMessage = "Only PDF files are allowed.";
-        } else {
-            $uploadDir = "uploads/news/";
-            if (!is_dir($uploadDir)) mkdir($uploadDir, 0775, true);
 
-            $fileName = time() . "_" . preg_replace('/[^a-zA-Z0-9_-]/', '_', basename($_FILES['pdf_file']['name']));
-            $filePath = $uploadDir . $fileName;
+        if ($pdfUploaded) {
+            $ext = strtolower(pathinfo($_FILES['pdf_file']['name'], PATHINFO_EXTENSION));
 
-            if (move_uploaded_file($_FILES['pdf_file']['tmp_name'], $filePath)) {
-                $stmt = $pdo->prepare("INSERT INTO news (heading, description, pdf_file, created_at) VALUES (:heading, :description, :pdf_file, NOW())");
-                $stmt->execute([
-                    ':heading' => $heading,
-                    ':description' => $description,
-                    ':pdf_file' => $filePath
-                ]);
+            if ($ext !== 'pdf') {
+                $errorMessage = "Only PDF files are allowed.";
+            } else {
+                $uploadDir = "uploads/news/";
+                if (!is_dir($uploadDir)) mkdir($uploadDir, 0775, true);
 
-                // Keep latest 10 news
-                $stmt = $pdo->query("SELECT id, pdf_file FROM news ORDER BY created_at DESC");
-                $allNews = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                if (count($allNews) > 10) {
-                    $toDelete = array_slice($allNews, 10);
-                    $ids = array_column($toDelete, 'id');
-                    foreach ($toDelete as $news) {
-                        if (file_exists($news['pdf_file'])) unlink($news['pdf_file']);
+                $fileName = time() . "_" . preg_replace('/[^a-zA-Z0-9_-]/', '_', basename($_FILES['pdf_file']['name']));
+                $filePath = $uploadDir . $fileName;
+
+                if (!move_uploaded_file($_FILES['pdf_file']['tmp_name'], $filePath)) {
+                    $errorMessage = "Failed to upload PDF.";
+                }
+            }
+        }
+
+        if (!$errorMessage) {
+            $stmt = $pdo->prepare("INSERT INTO news (heading, description, pdf_file, news_link, created_at)
+                                   VALUES (:heading, :description, :pdf_file, :news_link, NOW())");
+
+            $stmt->execute([
+                ':heading' => $heading,
+                ':description' => $description,
+                ':pdf_file' => $filePath,
+                ':news_link' => $link !== '' ? $link : null
+            ]);
+
+            // Keep only latest 10 news
+            $stmt = $pdo->query("SELECT id, pdf_file FROM news ORDER BY created_at DESC");
+            $allNews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($allNews) > 10) {
+                $toDelete = array_slice($allNews, 10);
+                $ids = array_column($toDelete, 'id');
+
+                foreach ($toDelete as $news) {
+                    if (!empty($news['pdf_file']) && file_exists($news['pdf_file'])) {
+                        unlink($news['pdf_file']);
                     }
-                    $in = str_repeat('?,', count($ids) - 1) . '?';
-                    $stmt = $pdo->prepare("DELETE FROM news WHERE id IN ($in)");
-                    $stmt->execute($ids);
                 }
 
-                $successMessage = "News added successfully!";
-            } else {
-                $errorMessage = "Failed to upload PDF.";
+                $in = str_repeat('?,', count($ids) - 1) . '?';
+                $stmt = $pdo->prepare("DELETE FROM news WHERE id IN ($in)");
+                $stmt->execute($ids);
             }
+
+            $successMessage = "News added successfully!";
         }
     }
 }
@@ -60,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add News - Admin</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Bootstrap CSS -->
@@ -115,9 +134,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div class="mb-4">
-                    <label class="form-label">PDF File *</label>
-                    <input type="file" name="pdf_file" class="form-control" accept="application/pdf" required>
-                    <div class="form-text">Please upload a PDF file for this news item.</div>
+                    <label class="form-label">PDF File (Optional)</label>
+                    <input type="file" name="pdf_file" class="form-control" accept="application/pdf">
+                    <div class="form-text">Upload a PDF OR provide a news link below.</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">News Link (Optional)</label>
+                    <input type="url" name="news_link" class="form-control" placeholder="https://example.com">
+                    <div class="form-text">Provide a link if no PDF is uploaded.</div>
                 </div>
                 
                 <div class="d-flex gap-2">

@@ -60,7 +60,7 @@ $latestMessages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <i class="fas fa-chart-line"></i>
             Dashboard Overview
         </h1>
-        <p class="page-subtitle">Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>👋p</p>
+        <p class="page-subtitle">Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>👋</p>
     </div>
 
     <?php if ($newMessages > 0): ?>

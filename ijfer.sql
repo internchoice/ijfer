@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2026 at 01:04 PM
+-- Generation Time: Mar 01, 2026 at 06:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -92,7 +92,8 @@ CREATE TABLE `news` (
   `id` int(10) UNSIGNED NOT NULL,
   `heading` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `pdf_file` varchar(500) NOT NULL,
+  `pdf_file` varchar(255) DEFAULT NULL,
+  `news_link` varchar(500) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -100,17 +101,16 @@ CREATE TABLE `news` (
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `heading`, `description`, `pdf_file`, `created_at`) VALUES
-(9, 'news 1', 'abcd', 'uploads/news/1771961748_Project_Documentation_IJFER_pdf', '2026-02-25 01:05:48'),
-(10, 'news 2', 'jdfjhjh', 'uploads/news/1772020169_Project_Documentation_IJFER_pdf', '2026-02-25 17:19:29'),
-(11, 'news 3', 'kjfvkndsan', 'uploads/news/1772020179_Project_Documentation_IJFER_pdf', '2026-02-25 17:19:39'),
-(12, 'news 4', 'jhdjsjdjn', 'uploads/news/1772020192_Project_Documentation_IJFER_pdf', '2026-02-25 17:19:52'),
-(13, 'news 5', 'sjdhugjgjdnf', 'uploads/news/1772020204_Project_Documentation_IJFER_pdf', '2026-02-25 17:20:04'),
-(14, 'news 6', 'jdhjdsbmndsa', 'uploads/news/1772020214_Project_Documentation_IJFER_pdf', '2026-02-25 17:20:14'),
-(15, 'news 7', 'bsddhjhjdss', 'uploads/news/1772020225_Project_Documentation_IJFER_pdf', '2026-02-25 17:20:25'),
-(16, 'news 8', 'njdhhjan,dja', 'uploads/news/1772020238_Project_Documentation_IJFER_pdf', '2026-02-25 17:20:38'),
-(17, 'news 9', 'dnjhsd', 'uploads/news/1772020252_Project_Documentation_IJFER_pdf', '2026-02-25 17:20:52'),
-(18, 'news 10', 'mjhsbdbmnbc', 'uploads/news/1772020262_Project_Documentation_IJFER_pdf', '2026-02-25 17:21:02');
+INSERT INTO `news` (`id`, `heading`, `description`, `pdf_file`, `news_link`, `created_at`) VALUES
+(3, 'News 2', 'dbhhdcjssd', 'uploads/news/1772292461_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:57:41'),
+(4, 'News 3', 'snjdwjhk', 'uploads/news/1772292473_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:57:53'),
+(5, 'News 4', 'dbjdgdwj', 'uploads/news/1772292484_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:58:04'),
+(6, 'News 5', 'jdjhjdhjfd', 'uploads/news/1772292497_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:58:17'),
+(7, 'News 6', 'dkhgdujejdh', 'uploads/news/1772292509_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:58:29'),
+(8, 'News 7', 'bsbdjhjsd', 'uploads/news/1772292522_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:58:42'),
+(9, 'News 8', 'jhdhjdewe', 'uploads/news/1772292533_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:58:53'),
+(10, 'News 9', 'djhjdchwkj', 'uploads/news/1772292544_Project_Documentation_IJFER_pdf', NULL, '2026-02-28 20:59:04'),
+(11, 'News 10', 'dsjkhsjnkjedw', 'uploads/news/1772292556_Project_Documentation_IJFER_pdf', '', '2026-02-28 20:59:16');
 
 -- --------------------------------------------------------
 
@@ -122,6 +122,7 @@ CREATE TABLE `papers` (
   `id` int(11) NOT NULL,
   `paper_id` varchar(100) NOT NULL,
   `volume` varchar(100) NOT NULL,
+  `issue` varchar(100) DEFAULT NULL,
   `research_area` varchar(150) NOT NULL,
   `paper_title` varchar(255) NOT NULL,
   `abstract` text NOT NULL,
@@ -137,10 +138,8 @@ CREATE TABLE `papers` (
 -- Dumping data for table `papers`
 --
 
-INSERT INTO `papers` (`id`, `paper_id`, `volume`, `research_area`, `paper_title`, `abstract`, `country`, `authors`, `file_name`, `file_path`, `status`, `submitted_at`) VALUES
-(1, 'IJFER_FEBRUARY_2026_001', 'Volume 6 Issue 6, June 2024', 'Mathematics', 'abc', 'jhcdcf', 'india', '[{\"name\":\"jhshj\",\"email\":\"bshd@gmail.com\",\"phone\":\"456154\",\"institution\":\"jdhhgsd\"},{\"name\":\"snbdd\",\"email\":\"axb@vam.com\",\"phone\":\"77474\",\"institution\":\"snbd\"}]', 'IJFER_FEBRUARY_2026_001.docx', 'admin/uploads/IJFER_FEBRUARY_2026_001.docx', 'accepted', '2026-02-19 07:36:14'),
-(2, 'IJFER_FEBRUARY_2026_002', 'Volume 6 Issue 6, June 2024', 'Chemistry', 'xyz', 'adsreb', 'India', '[{\"name\":\"jdhhhd\",\"email\":\"bas@xyz.com\",\"phone\":\"856367282\",\"institution\":\"dhdjhdh\"}]', 'IJFER_FEBRUARY_2026_002.docx', 'admin/uploads/IJFER_FEBRUARY_2026_002.docx', 'accepted', '2026-02-24 08:24:37'),
-(3, 'TEST_002', 'Volume 5 Issue 2, March 2023', 'Engineering', 'Test Past Paper', 'Sample abstract', 'India', '[{\"name\":\"Author Name\",\"email\":\"author@example.com\",\"phone\":\"1234567890\"}]', 'test.pdf', 'admin/uploads/test.pdf', 'accepted', '2026-02-24 08:36:26');
+INSERT INTO `papers` (`id`, `paper_id`, `volume`, `issue`, `research_area`, `paper_title`, `abstract`, `country`, `authors`, `file_name`, `file_path`, `status`, `submitted_at`) VALUES
+(9, 'IJFER_MARCH_2026_001', 'Volume 1', 'Issue 1', 'Bio-Technology', 'Bio-Tech Paper', 'mjdhjhsbnnjhjdff', 'India', '[{\"name\":\"Prajwal Shinde\",\"email\":\"xyz@gmail.com\",\"phone\":\"1234567890\",\"institution\":\"nnasdsa\"}]', 'IJFER_MARCH_2026_001.docx', 'admin/uploads/IJFER_MARCH_2026_001.docx', 'accepted', '2026-03-01 17:03:45');
 
 -- --------------------------------------------------------
 
@@ -249,13 +248,13 @@ ALTER TABLE `editorial_board`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `papers`
 --
 ALTER TABLE `papers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `paper_templates`
