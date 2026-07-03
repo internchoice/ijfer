@@ -12,10 +12,23 @@ try {
     die("Database error: " . $e->getMessage());
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Paper Format - IJFER</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
 
-<?php include "../../components/header.php"; ?>
+<body>
+    <?php include "../../components/header.php"; ?>
+    <div id="navbar-placeholder"></div>
 
-<main class="container my-4">
+    <main class="container my-4">
     <div class="main-content">
 
         <h1>Sample Paper Format</h1>
@@ -50,4 +63,11 @@ try {
     </div>
 </main>
 
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/script.js"></script>
+
 <?php include "../../components/footer.php"; ?>
+</body>
+</html>

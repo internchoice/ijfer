@@ -20,7 +20,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <li class="<?php echo ($currentPage == 'add_news.php') ? 'active' : ''; ?>">
             <a href="add_news.php">
                 <i class="fas fa-newspaper"></i>
-                <span>News</span>
+                <span>Add News</span>
+            </a>
+        </li>
+
+        <li class="<?php echo ($currentPage == 'manage_news.php') ? 'active' : ''; ?>">
+            <a href="manage_news.php">
+                <i class="fas fa-newspaper"></i>
+                <span>Manage News</span>
             </a>
         </li>
         

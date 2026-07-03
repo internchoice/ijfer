@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indexing - IJFER</title>
-  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../assets/css/style.css">
@@ -30,27 +30,27 @@
         <h2 class="mb-4">Our Indexing Partners</h2>
         <div class="row">
           <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind1.png" alt="Indexing Partner 1" class="img-fluid indexing-image">
+            <img src="assets/images/ind1.png" alt="Indexing Partner 1" class="img-fluid indexing-image">
           </div>
           
           <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind2.jpg" alt="Indexing Partner 2" class="img-fluid indexing-image">
+            <img src="assets/images/ind2.jpg" alt="Indexing Partner 2" class="img-fluid indexing-image">
           </div>
           
           <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind3.jpg" alt="Indexing Partner 3" class="img-fluid indexing-image">
+            <img src="assets/images/ind3.jpg" alt="Indexing Partner 3" class="img-fluid indexing-image">
           </div>
           
           <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind4.jpg" alt="Indexing Partner 4" class="img-fluid indexing-image">
+            <img src="assets/images/ind4.jpg" alt="Indexing Partner 4" class="img-fluid indexing-image">
           </div>
           
           <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind5.png" alt="Indexing Partner 5" class="img-fluid indexing-image">
+            <img src="assets/images/ind5.png" alt="Indexing Partner 5" class="img-fluid indexing-image">
           </div>
           
           <div class="col-md-4 mb-4 text-center">
-            <img src="../../assets/images/ind6.png" alt="Indexing Partner 6" class="img-fluid indexing-image">
+            <img src="assets/images/ind6.png" alt="Indexing Partner 6" class="img-fluid indexing-image">
           </div>
         </div>
       </div>

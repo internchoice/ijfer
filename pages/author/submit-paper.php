@@ -146,7 +146,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="form-grid">
     <div>
         <label>Volume</label>
-        <p class="volume-text">Volume 6 Issue 6, June 2024</p>
+        <p class="volume-text">
+            <?php
+            require_once "../../admin/config/db.php"; // adjust path if needed
+
+            $stmt = $pdo->query("
+                SELECT volume, issue
+                FROM papers
+                WHERE status='accepted'
+                ORDER BY id DESC
+                LIMIT 1
+            ");
+
+            $currentIssue = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if($currentIssue){
+                echo htmlspecialchars(
+                $currentIssue['volume'] . " " .
+                $currentIssue['issue'] . ", " .
+                date("F Y")
+            );
+            } else {
+                echo "No Current Issue Available";
+            }
+            ?>
+        </p>
     </div>
 
     <div>

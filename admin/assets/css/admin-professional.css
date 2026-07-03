@@ -11,49 +11,52 @@
   --primary: #0b1f3b; /* Deep Navy */
   --primary-dark: #08162b;
   --primary-light: #1a365d;
-  
+
   /* Secondary Colors */
   --secondary: #c6a75e; /* Muted Gold */
   --secondary-dark: #b8964a;
   --secondary-light: #d4b872;
-  
+
   /* Accent Colors */
   --accent: #2f5d8a; /* Steel Blue */
   --accent-dark: #254a6e;
   --accent-light: #436ea1;
-  
+
   /* Status Colors */
   --success: #10b981; /* Emerald Green */
   --warning: #f59e0b; /* Amber */
   --danger: #ef4444; /* Red */
   --info: #3b82f6; /* Blue */
-  
+
   /* Text Colors */
   --text-dark: #1f2937;
   --text-medium: #4b5563;
   --text-light: #6b7280;
   --text-white: #ffffff;
-  
+
   /* Background Colors */
   --bg-primary: #ffffff;
   --bg-secondary: #f9fafb;
   --bg-accent: #f0f5fa;
   --bg-dark: #0b1f3b;
-  
+
   /* Border Colors */
   --border-light: #e5e7eb;
   --border-medium: #d1d5db;
   --border-dark: #9ca3af;
-  
+
   /* Shadows */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
   /* Spacing */
-  --sidebar-width: 260px;
+  --sidebar-width: 200px;
   --header-height: 60px;
   --border-radius: 8px;
   --border-radius-lg: 12px;
@@ -70,7 +73,8 @@
 }
 
 body {
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-dark);
@@ -89,7 +93,11 @@ body {
   left: 0;
   bottom: 0;
   width: var(--sidebar-width);
-  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--primary) 0%,
+    var(--primary-light) 100%
+  );
   color: var(--text-white);
   z-index: 1000;
   box-shadow: var(--shadow-lg);
@@ -412,6 +420,7 @@ textarea.form-control {
   transition: var(--transition);
   text-decoration: none;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .btn:focus {
@@ -627,7 +636,11 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-light) 100%
+  );
   padding: 1rem;
 }
 
@@ -666,35 +679,35 @@ textarea.form-control {
     width: 70px;
     overflow: hidden;
   }
-  
+
   .sidebar:hover {
     width: var(--sidebar-width);
   }
-  
+
   .sidebar-header .logo-text,
   .sidebar-menu li a span {
     opacity: 0;
     transition: opacity 0.2s;
   }
-  
+
   .sidebar:hover .sidebar-header .logo-text,
   .sidebar:hover .sidebar-menu li a span {
     opacity: 1;
   }
-  
+
   .main-content {
     margin-left: 70px;
   }
-  
+
   .dashboard-cards {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1rem;
   }
-  
+
   .stat-card {
     padding: 1.25rem;
   }
-  
+
   .page-title {
     font-size: 1.75rem;
   }
@@ -704,35 +717,35 @@ textarea.form-control {
   .sidebar {
     transform: translateX(-100%);
   }
-  
+
   .sidebar.active {
     transform: translateX(0);
   }
-  
+
   .main-content {
     margin-left: 0;
     padding: 1.5rem;
   }
-  
+
   .dashboard-cards {
     grid-template-columns: 1fr;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
   }
-  
+
   .card-body {
     padding: 1.25rem;
   }
-  
+
   .table-container {
     overflow-x: auto;
   }
-  
+
   .table th,
   .table td {
     padding: 0.75rem;
@@ -744,23 +757,23 @@ textarea.form-control {
   .main-content {
     padding: 1rem;
   }
-  
+
   .login-card {
     margin: 0.5rem;
   }
-  
+
   .login-body {
     padding: 1.5rem;
   }
-  
+
   .btn {
     width: 100%;
   }
-  
+
   .stat-card {
     padding: 1rem;
   }
-  
+
   .stat-card .count {
     font-size: 1.75rem;
   }
@@ -1078,4 +1091,42 @@ textarea.form-control {
 .professional-form .btn-outline-primary:hover {
   background: var(--primary);
   color: var(--text-white);
+}
+
+/* ===== FIX HORIZONTAL SCROLL FOR MANAGE PAPERS ===== */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Make table wider so scroll activates */
+.admin-table {
+  min-width: 1600px; /* Increase if still tight */
+  border-collapse: collapse;
+}
+
+/* Prevent text wrapping so columns don't break */
+.admin-table th,
+.admin-table td {
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+/* ===== FIX ACTION BUTTONS VERTICAL ALIGNMENT ===== */
+
+.actions .btn-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.actions .btn-group-vertical a {
+  width: 100%;
+}
+
+.actions .btn-group-vertical button {
+  width: 100%;
 }

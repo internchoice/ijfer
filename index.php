@@ -111,7 +111,9 @@ try {
                     <h6 class="news-heading"><?= htmlspecialchars($news['heading']) ?></h6>
                     <p class="mb-0"><?= htmlspecialchars($news['description']) ?></p>
                     <?php if(!empty($news['pdf_file'])): ?>
-                      <a href="<?= htmlspecialchars($news['pdf_file']) ?>" class="news-link" target="_blank">Read more</a>
+                        <a href="admin/<?= htmlspecialchars($news['pdf_file']) ?>" class="news-link" target="_blank">Read more</a>
+                        <?php elseif(!empty($news['news_link'])): ?>
+                        <a href="<?= htmlspecialchars($news['news_link']) ?>" class="news-link" target="_blank">Read more</a>
                     <?php endif; ?>
                   </div>
                 <?php endforeach; ?>
