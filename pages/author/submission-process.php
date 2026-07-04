@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publication Process - IJFER</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <?php include __DIR__ . "../../../components/header.php"; ?>
+  <div id="navbar-placeholder"></div>
+
+  <main class="container my-4">
+    <div class="main-content">
+
+      <h1>Publication Process</h1>
+      
+      <p>Our publication workflow is transparent and efficient. The process includes:</p>
+      
+      <div class="submission-process-flow">
+        <div class="process-timeline">
+          <!-- Step 1 -->
+          <div class="timeline-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-user-edit"></i></div>
+              <div class="step-title">Author Submits Research Paper</div>
+            </div>
+          </div>
+          
+          <!-- Step 2 -->
+          <div class="timeline-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-search"></i></div>
+              <div class="step-title">Preliminary Review</div>
+              <div class="step-desc">(Quality, Plagiarism & Language Check)</div>
+            </div>
+          </div>
+          
+          <!-- Branch: Rejection Path -->
+          <div class="timeline-step rejection-path">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-times-circle"></i></div>
+              <div class="step-title">Rejection</div>
+              <div class="step-desc">Due to Plagiarism, Scope Mismatch, or Major Quality Issues</div>
+            </div>
+          </div>
+          
+          <!-- Continue Path: Accepted for Review -->
+          <div class="timeline-step continue-path">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="step-title">Original Manuscript – Accepted for Peer Review</div>
+              <div class="step-desc">& Paper ID Assigned</div>
+            </div>
+          </div>
+          
+          <!-- Step 5 -->
+          <div class="timeline-step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-users"></i></div>
+              <div class="step-title">Editorial Board & Peer Review Evaluation</div>
+            </div>
+          </div>
+          
+          <!-- Decision Step - Multiple Outcomes -->
+          <div class="timeline-step decision-step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+              <div class="step-title">Decision:</div>
+              <div class="decision-options">
+                <div class="decision-option">
+                  <i class="fas fa-check text-success"></i> Accepted
+                </div>
+                <div class="decision-option">
+                  <i class="fas fa-redo text-warning"></i> Minor Revision Required
+                </div>
+                <div class="decision-option">
+                  <i class="fas fa-sync-alt text-warning"></i> Major Revision Required
+                </div>
+                <div class="decision-option">
+                  <i class="fas fa-times text-danger"></i> Rejected Due to Reviewer Concerns or Technical Issues
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Step 7 -->
+          <div class="timeline-step">
+            <div class="step-number">7</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-envelope"></i></div>
+              <div class="step-title">Final Decision Notification Sent to Author</div>
+            </div>
+          </div>
+          
+          <!-- Conditional Step: If Accepted -->
+          <div class="timeline-step conditional-step">
+            <div class="step-number">8</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-file-contract"></i></div>
+              <div class="step-title">Copyright Form Submission & Publication Fee Payment</div>
+              <div class="step-desc">(After Acceptance Only)</div>
+            </div>
+          </div>
+          
+          <!-- Step 9 -->
+          <div class="timeline-step">
+            <div class="step-number">9</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-file-alt"></i></div>
+              <div class="step-title">Final Proof Sent to Author for Approval</div>
+            </div>
+          </div>
+          
+          <!-- Step 10 -->
+          <div class="timeline-step">
+            <div class="step-number">10</div>
+            <div class="step-content">
+              <div class="step-icon"><i class="fas fa-globe"></i></div>
+              <div class="step-title">Article Published Online with Open Access</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    </div>
+  </main>
+
+  <?php include __DIR__ . "../../../components/footer.php"; ?>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/script.js"></script>
+</body>
+</html>
