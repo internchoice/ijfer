@@ -1,5 +1,7 @@
-<?php 
+<?php
+session_start();
 require_once("../../admin/config/db.php");
+
 
 $successMessage = "";
 
@@ -85,8 +87,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':file_path'    => $filePathForDB
         ]);
 
-        $successMessage = "Paper Submitted Successfully! Your Paper ID: " . $paper_id;
+        // $successMessage = "Paper Submitted Successfully! Your Paper ID: " . $paper_id;
+// ────────────────────────────────────────────────
+//     After successful DB insert + file upload
+// ────────────────────────────────────────────────
 
+$_SESSION['just_submitted'] = [
+    'paper_id'     => $paper_id,
+    'paper_title'  => $paper_title,
+    'first_author' => $authors[0]['name'] ?? 'Author',
+];
+
+// Optional: keep sending email/WhatsApp here
+
+header("Location: submission-success.php");
+exit;
         if (!empty($authors)) {
             $firstAuthor = $authors[0];
             $to = $firstAuthor['email'];
@@ -215,14 +230,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <h2 class="mt-4 mb-3">Add Author</h2>
 
 <div id="authorsContainer">
-    <div class="author-row d-flex align-items-center gap-2 mb-2 p-2 border rounded">
+    <!-- <div class="author-row d-flex align-items-center gap-2 mb-2 p-2 border rounded">
         <span class="author-sn badge bg-primary">Author 1</span>
         <input type="text" name="author_name[]" placeholder="Author Full Name" required class="form-control">
         <input type="email" name="author_email[]" placeholder="Author Email ID" required class="form-control">
         <input type="tel" name="author_phone[]" placeholder="Contact Number" required class="form-control">
         <input type="text" name="author_institution[]" placeholder="College/Institute Name" required class="form-control">
         <button type="button" class="deleteAuthorBtn btn btn-danger btn-sm ms-auto">Delete</button>
-    </div>
+    </div> -->
+<div class="author-row d-flex align-items-center gap-2 mb-2 p-2 border rounded">
+    <span class="author-sn badge bg-primary">Author 1</span>
+    <input type="text" name="author_name[]" placeholder="Author Full Name" required class="form-control">
+    <input type="email" name="author_email[]" placeholder="Author Email ID" required class="form-control">
+    <input type="tel" name="author_phone[]" placeholder="WhatsApp Number" required class="form-control" pattern="\d{10,15}" title="Enter a valid WhatsApp number">
+    <input type="text" name="author_institution[]" placeholder="College/Institute Name" required class="form-control">
+    <button type="button" class="deleteAuthorBtn btn btn-danger btn-sm ms-auto">Delete</button>
+</div>
 </div>
 
 <button type="button" id="addAuthorBtn" class="btn btn-outline-secondary mt-2">

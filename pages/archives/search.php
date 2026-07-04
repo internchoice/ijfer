@@ -4,10 +4,11 @@ require_once __DIR__ . "/../../admin/config/db.php";
 $keyword = $_GET['keyword'] ?? '';
 $year = $_GET['year'] ?? '';
 
+// Build SQL
 $sql = "SELECT * FROM papers WHERE status='accepted'";
 $params = [];
 
-// 🔍 Search by keyword (title, research_area, authors JSON)
+// Keyword search
 if (!empty($keyword)) {
     $sql .= " AND (
         paper_title LIKE ? 
@@ -19,7 +20,7 @@ if (!empty($keyword)) {
     $params[] = "%$keyword%";
 }
 
-// 📅 Filter by year (extract year from volume text)
+// ✅ Filter by year inside VOLUME column (example: June 2026)
 if (!empty($year)) {
     $sql .= " AND volume LIKE ?";
     $params[] = "%$year%";
@@ -30,22 +31,34 @@ $sql .= " ORDER BY submitted_at DESC";
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $papers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// ────────────────────────────────────────────────
+// Auto-generate years starting from 2026
+// ────────────────────────────────────────────────
+$currentYear = (int) date('Y');
+$startYear = 2026;
+
+if ($currentYear < $startYear){
+    $years = [$startYear];
+} else {
+    $years = range($startYear, $currentYear);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Papers - IJFER</title>
-  <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../../assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Papers - IJFER</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/images/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
+
 <body>
-  <?php include __DIR__ . "/../../components/header.php"; ?>
-  <div id="navbar-placeholder"></div>
+
+<?php include __DIR__ . "/../../components/header.php"; ?>
 
 <main class="container my-4">
 <div class="main-content">
@@ -66,9 +79,11 @@ $papers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="d-flex gap-2">
             <select name="year" class="form-select">
                 <option value="">All Years</option>
-                <option value="2025" <?= ($year=='2025')?'selected':''; ?>>2025</option>
-                <option value="2024" <?= ($year=='2024')?'selected':''; ?>>2024</option>
-                <option value="2023" <?= ($year=='2023')?'selected':''; ?>>2023</option>
+                <?php foreach ($years as $y): ?>
+                    <option value="<?= $y ?>" <?= ($year == $y) ? 'selected' : ''; ?>>
+                        <?= $y ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
 
             <button class="btn btn-primary" type="submit">
@@ -131,6 +146,8 @@ $papers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <?php include __DIR__ . "/../../components/footer.php"; ?>
+
 </body>
 </html>
